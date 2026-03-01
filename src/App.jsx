@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react'
 
 const menuItems = [
-  ['Impact', '#impact'],
-  ['Lifestyle', '#lifestyle'],
-  ['Performance', '#performance'],
+  ['Le produit', '#impact'],
+  ['Pourquoi ça marche', '#lifestyle'],
+  ['Résultats', '#performance'],
   ['Comparatif', '#comparatif'],
 ]
 
