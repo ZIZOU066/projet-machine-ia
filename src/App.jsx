@@ -10,17 +10,31 @@ const menuItems = [
 const performanceGallery = [
   {
     src: '/assets/nexgym/performance-athlete-1.jpg',
-    alt: 'Athlète en effort de tirage avec résistance intelligente',
+    alt: 'Athlète en effort de force avec résistance intelligente',
+    title: 'Force fonctionnelle',
+    text: 'Construisez puissance et stabilité avec une résistance précise et progressive.',
   },
   {
     src: '/assets/nexgym/performance-athlete-2.jpg',
-    alt: 'Athlète en sprint avec suivi biomécanique',
+    alt: 'Athlète en effort cardio et conditionnement',
+    title: 'Cardio & conditionnement',
+    text: 'Augmentez votre endurance avec des séances dynamiques adaptées à votre rythme.',
+  },
+  {
+    src: '/assets/nexgym/file_275---1ff9b3da-16b0-441b-aa37-2930485dbc88.jpg',
+    alt: 'Athlète en mouvement pour mobilité et contrôle',
+    title: 'Mobilité & contrôle',
+    text: 'Améliorez vos amplitudes et la qualité de mouvement au quotidien.',
   },
   {
     src: '/assets/nexgym/performance-detail-footwork.jpg',
-    alt: 'Travail de pieds avec capteur de résistance',
+    alt: 'Travail de pieds et récupération active',
+    title: 'Récupération active',
+    text: 'Travaillez avec précision et réduisez le risque de blessure grâce au guidage IA.',
   },
 ]
+
+
 
 const comparisonCards = [
   {
@@ -242,16 +256,20 @@ export default function App() {
 
         <section className="mx-auto mt-14 w-[min(1100px,94%)]" id="performance">
           <article className={`rounded-[2rem] border p-6 sm:p-8 ${theme.shell}`}>
-            <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-cyan-400">Performance athlète</p>
-            <h2 className="mt-3 text-3xl font-black uppercase sm:text-5xl">Résistance intelligente. Résultats visibles.</h2>
+            <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-cyan-400">One System. Four Training Pillars</p>
+            <h2 className="mt-3 text-3xl font-black uppercase sm:text-5xl">4 piliers pour progresser plus vite, sans compromis.</h2>
             <p className={`mt-4 text-sm font-semibold uppercase tracking-[0.1em] ${theme.muted}`}>
-              Chaque répétition est guidée, mesurée et optimisée en live.
+              Un seul système pour la force, le cardio, la mobilité et la récupération.
             </p>
 
-            <div className="mt-7 grid gap-4 sm:grid-cols-3">
+            <div className="mt-7 grid gap-4 sm:grid-cols-2">
               {performanceGallery.map((item) => (
-                <figure key={item.src} className="overflow-hidden rounded-2xl border border-current/10">
-                  <img src={item.src} alt={item.alt} className="h-64 w-full object-cover" />
+                <figure key={item.src} className={`overflow-hidden rounded-2xl border ${theme.shellSoft}`}>
+                  <img src={item.src} alt={item.alt} className="h-56 w-full object-cover sm:h-64" />
+                  <figcaption className="p-4">
+                    <p className="text-sm font-black uppercase tracking-[0.08em]">{item.title}</p>
+                    <p className={`mt-2 text-xs leading-relaxed ${theme.muted}`}>{item.text}</p>
+                  </figcaption>
                 </figure>
               ))}
             </div>
