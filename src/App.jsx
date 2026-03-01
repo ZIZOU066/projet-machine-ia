@@ -204,7 +204,7 @@ export default function App() {
             />
             <div className={`absolute inset-0 ${theme.imageOverlay}`} />
             <div className="absolute inset-x-0 bottom-0 p-6 text-left sm:p-8">
-              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-cyan-300">Hero premium</p>
+              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-cyan-300">NEXGYM ONE</p>
               <h2 className="mt-3 max-w-xl text-2xl font-black uppercase leading-tight sm:text-4xl">
                 L'objet fitness qui upgrade instantanément votre intérieur.
               </h2>
