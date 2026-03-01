@@ -17,39 +17,33 @@ const performanceGallery = [
     alt: 'Athlète en sprint avec suivi biomécanique',
   },
   {
+    src: '/assets/nexgym/file_275---1ff9b3da-16b0-441b-aa37-2930485dbc88.jpg',
+    alt: 'Athlète en séance premium avec NEXGYM ONE',
+  },
+  {
     src: '/assets/nexgym/performance-detail-footwork.jpg',
     alt: 'Travail de pieds avec capteur de résistance',
   },
 ]
 
-const comparisonCards = [
+const comparisonRows = [
   {
-    title: 'Salle de sport',
-    subtitle: 'Abonnement + trajets',
-    metrics: [
-      { label: 'Coût annuel', value: 58, hint: '≈ 1 100 €/an' },
-      { label: 'Flexibilité', value: 42, hint: 'Horaires imposés' },
-      { label: 'Suivi personnalisé', value: 36, hint: 'Souvent générique' },
-    ],
+    criterion: 'Coût annuel',
+    gym: '≈ 1 100 € / an',
+    coach: '≈ 4 800 € / an',
+    nexgym: 'Paiement unique + usage illimité',
   },
   {
-    title: 'Coach personnel',
-    subtitle: 'Ultra encadré, moins scalable',
-    metrics: [
-      { label: 'Coût annuel', value: 22, hint: '≈ 4 800 €/an' },
-      { label: 'Flexibilité', value: 68, hint: 'Rendez-vous à bloquer' },
-      { label: 'Suivi personnalisé', value: 95, hint: 'Très élevé' },
-    ],
+    criterion: 'Flexibilité horaire',
+    gym: 'Horaires imposés + trajets',
+    coach: 'Créneaux à réserver',
+    nexgym: 'Disponible 24/7 chez vous',
   },
   {
-    title: 'NEXGYM ONE',
-    subtitle: 'Setup premium à domicile',
-    featured: true,
-    metrics: [
-      { label: 'Coût annuel', value: 86, hint: 'Maîtrisé sur la durée' },
-      { label: 'Flexibilité', value: 96, hint: 'Quand vous voulez' },
-      { label: 'Suivi personnalisé', value: 88, hint: 'IA guidée en direct' },
-    ],
+    criterion: 'Suivi personnalisé',
+    gym: 'Programme standard',
+    coach: 'Excellent, mais dépend du planning',
+    nexgym: 'Guidage IA en direct, à chaque session',
   },
 ]
 
@@ -73,8 +67,6 @@ export default function App() {
             cta: 'bg-white text-black hover:bg-white/90',
             ghost: 'border-white/20 hover:border-white/40',
             imageOverlay: 'bg-gradient-to-t from-black/75 via-black/30 to-transparent',
-            barTrack: 'bg-white/10',
-            barFill: 'bg-gradient-to-r from-cyan-300 via-indigo-400 to-fuchsia-400',
             featured: 'border-indigo-300/50 bg-indigo-400/10',
             fx: 'bg-[radial-gradient(circle_at_50%_0%,rgba(111,126,255,0.3),transparent_44%),radial-gradient(circle_at_0%_50%,rgba(145,0,255,0.2),transparent_40%),radial-gradient(circle_at_100%_50%,rgba(0,212,255,0.18),transparent_36%)]',
           }
@@ -91,8 +83,6 @@ export default function App() {
             cta: 'bg-[#0a0f1f] text-white hover:bg-black',
             ghost: 'border-black/20 hover:border-black/40',
             imageOverlay: 'bg-gradient-to-t from-[#0a0f1f]/55 via-[#0a0f1f]/8 to-transparent',
-            barTrack: 'bg-slate-200',
-            barFill: 'bg-gradient-to-r from-cyan-500 via-indigo-500 to-fuchsia-500',
             featured: 'border-indigo-400/40 bg-indigo-50',
             fx: 'bg-[radial-gradient(circle_at_50%_0%,rgba(99,102,241,0.24),transparent_44%),radial-gradient(circle_at_0%_50%,rgba(124,58,237,0.14),transparent_40%),radial-gradient(circle_at_100%_50%,rgba(6,182,212,0.14),transparent_36%)]',
           },
@@ -124,7 +114,7 @@ export default function App() {
                 {isDark ? 'Light' : 'Dark'}
               </button>
               <a href="#waitlist" className={`rounded-full px-4 py-2 text-xs font-bold transition ${theme.cta}`}>
-                Rejoindre la liste d'attente
+                Rejoindre la waitlist
               </a>
             </nav>
 
@@ -158,7 +148,7 @@ export default function App() {
           >
             <div className="overflow-hidden">
               <div className={`grid gap-2 rounded-2xl border p-2 ${theme.menuPanel}`}>
-                {[...menuItems, ["Liste d'attente", '#waitlist']].map(([label, href]) => (
+                {[...menuItems, ["Waitlist", '#waitlist']].map(([label, href]) => (
                   <a
                     key={label}
                     href={href}
@@ -177,23 +167,23 @@ export default function App() {
       <main id="top" className="relative z-10 pb-20 pt-28 sm:pt-32">
         <section className="mx-auto w-[min(1100px,94%)] text-center" id="impact">
           <p className="inline-flex rounded-full border border-fuchsia-400/40 bg-fuchsia-400/10 px-4 py-1 text-[11px] font-bold uppercase tracking-[0.22em] text-fuchsia-300">
-            Waitlist privée · Stock limité
+            Waitlist privée · Première série bientôt complète
           </p>
-          <h1 className="mx-auto mt-6 max-w-5xl text-5xl font-black uppercase leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl">
-            Le futur du training.
-            <span className={`block ${theme.strong}`}>Maintenant chez vous.</span>
+          <h1 className="mx-auto mt-6 max-w-5xl text-4xl font-black uppercase leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
+            NEXGYM ONE, la machine premium qui remplace la salle à domicile.
           </h1>
-          <p className={`mx-auto mt-6 max-w-2xl text-sm font-medium uppercase tracking-[0.16em] sm:text-base ${theme.muted}`}>
-            Rupture en cours. Prochaine vague réservée aux inscrits.
+          <p className={`mx-auto mt-5 max-w-3xl text-sm font-semibold sm:text-lg ${theme.muted}`}>
+            Entraînez-vous quand vous voulez, avec un guidage intelligent, sans trajet et sans compromis sur les résultats.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <a href="#waitlist" className={`rounded-full px-7 py-3 text-sm font-black uppercase tracking-wide sm:text-base ${theme.cta}`}>
-              Rejoindre la liste d'attente
+          <p className="mx-auto mt-6 inline-flex max-w-2xl items-center justify-center rounded-2xl border border-rose-400/50 bg-rose-500/10 px-5 py-3 text-xs font-black uppercase tracking-[0.12em] text-rose-300 sm:text-sm">
+            Rupture en cours · Prochain retour stock réservé aux inscrits waitlist
+          </p>
+
+          <div className="mt-8 flex items-center justify-center gap-3">
+            <a href="#waitlist" className={`rounded-full px-8 py-3 text-sm font-black uppercase tracking-wide sm:text-base ${theme.cta}`}>
+              Rejoindre la waitlist maintenant
             </a>
-            <span className={`text-xs font-semibold uppercase tracking-[0.14em] ${theme.soft}`}>
-              Sans paiement · Sans engagement
-            </span>
           </div>
 
           <article className={`relative mt-12 overflow-hidden rounded-[2.2rem] border ${theme.shell}`}>
@@ -204,9 +194,9 @@ export default function App() {
             />
             <div className={`absolute inset-0 ${theme.imageOverlay}`} />
             <div className="absolute inset-x-0 bottom-0 p-6 text-left sm:p-8">
-              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-cyan-300">Hero premium</p>
+              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-cyan-300">NEXGYM ONE</p>
               <h2 className="mt-3 max-w-xl text-2xl font-black uppercase leading-tight sm:text-4xl">
-                L'objet fitness qui upgrade instantanément votre intérieur.
+                Votre standard performance, installé chez vous.
               </h2>
             </div>
           </article>
@@ -244,10 +234,10 @@ export default function App() {
               Chaque répétition est guidée, mesurée et optimisée en live.
             </p>
 
-            <div className="mt-7 grid gap-4 sm:grid-cols-3">
+            <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {performanceGallery.map((item) => (
                 <figure key={item.src} className="overflow-hidden rounded-2xl border border-current/10">
-                  <img src={item.src} alt={item.alt} className="h-64 w-full object-cover" />
+                  <img src={item.src} alt={item.alt} className="h-64 w-full object-cover object-center" />
                 </figure>
               ))}
             </div>
@@ -256,45 +246,37 @@ export default function App() {
 
         <section id="comparatif" className="mx-auto mt-16 w-[min(1100px,94%)]">
           <div className={`rounded-[2rem] border p-6 sm:p-8 ${theme.shellSoft}`}>
-            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-violet-400">Comparatif express</p>
-            <h3 className="mt-3 text-3xl font-black uppercase sm:text-4xl">Le premium se voit en 3 métriques.</h3>
-            <p className={`mt-3 text-xs font-semibold uppercase tracking-[0.1em] sm:text-sm ${theme.muted}`}>
-              Plus la barre est haute, plus l'option est avantageuse pour votre quotidien.
-            </p>
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-violet-400">Comparatif business</p>
+            <h3 className="mt-3 text-3xl font-black uppercase sm:text-4xl">Salle, coach ou NEXGYM ONE : où est le meilleur ROI ?</h3>
 
-            <div className="mt-8 grid gap-4 md:grid-cols-3">
-              {comparisonCards.map((option) => (
-                <article
-                  key={option.title}
-                  className={`rounded-2xl border p-5 transition ${theme.shell} ${option.featured ? theme.featured : ''}`}
-                >
-                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-cyan-400">{option.subtitle}</p>
-                  <h4 className="mt-2 text-xl font-black uppercase">{option.title}</h4>
+            <div className="mt-8 overflow-hidden rounded-2xl border border-current/10">
+              <div className="grid grid-cols-4 text-[10px] font-black uppercase tracking-[0.12em] sm:text-xs">
+                <div className={`border-b border-r border-current/10 p-3 ${theme.shell}`}>Critère</div>
+                <div className={`border-b border-r border-current/10 p-3 ${theme.shell}`}>Salle</div>
+                <div className={`border-b border-r border-current/10 p-3 ${theme.shell}`}>Coach</div>
+                <div className={`border-b p-3 ${theme.featured}`}>NEXGYM ONE</div>
+              </div>
 
-                  <div className="mt-5 space-y-4">
-                    {option.metrics.map((metric) => (
-                      <div key={metric.label}>
-                        <div className="mb-1 flex items-center justify-between gap-3 text-[11px] font-bold uppercase tracking-[0.12em]">
-                          <span className={theme.muted}>{metric.label}</span>
-                          <span>{metric.value}%</span>
-                        </div>
-                        <div className={`h-2.5 w-full overflow-hidden rounded-full ${theme.barTrack}`}>
-                          <div className={`h-full rounded-full ${theme.barFill}`} style={{ width: `${metric.value}%` }} />
-                        </div>
-                        <p className={`mt-1 text-[10px] font-semibold uppercase tracking-[0.08em] ${theme.soft}`}>{metric.hint}</p>
-                      </div>
-                    ))}
-                  </div>
-                </article>
+              {comparisonRows.map((row) => (
+                <div key={row.criterion} className="grid grid-cols-4 text-[11px] font-semibold sm:text-sm">
+                  <div className="border-b border-r border-current/10 p-3 font-bold uppercase tracking-[0.08em]">{row.criterion}</div>
+                  <div className="border-b border-r border-current/10 p-3">{row.gym}</div>
+                  <div className="border-b border-r border-current/10 p-3">{row.coach}</div>
+                  <div className={`border-b p-3 ${theme.featured}`}>{row.nexgym}</div>
+                </div>
               ))}
             </div>
+
+            <p className={`mt-6 text-sm font-bold uppercase tracking-[0.08em] ${theme.muted}`}>
+              Pour un profil exigeant avec peu de temps, NEXGYM ONE gagne: coût maîtrisé, liberté totale et suivi constant sans dépendre d'horaires externes.
+            </p>
           </div>
         </section>
 
         <section id="waitlist" className="mx-auto mt-16 w-[min(760px,94%)]">
           <div className={`rounded-[2rem] border p-6 sm:p-10 ${theme.shell}`}>
             <p className="text-center text-[11px] font-bold uppercase tracking-[0.22em] text-violet-400">Accès prioritaire</p>
-            <h2 className="mt-3 text-center text-3xl font-black uppercase sm:text-5xl">Prenez votre place.</h2>
+            <h2 className="mt-3 text-center text-3xl font-black uppercase sm:text-5xl">Prenez votre place sur la waitlist.</h2>
 
             <form className="mx-auto mt-8 grid max-w-xl gap-3 sm:grid-cols-2">
               <input
@@ -313,12 +295,12 @@ export default function App() {
               />
 
               <button type="submit" className={`rounded-full px-6 py-3 text-sm font-black uppercase tracking-wide sm:col-span-2 ${theme.cta}`}>
-                Rejoindre la liste d'attente
+                Rejoindre la waitlist
               </button>
             </form>
 
             <p className={`mt-4 text-center text-xs font-semibold uppercase tracking-[0.1em] ${theme.soft}`}>
-              Un seul usage: vous prévenir avant tout le monde.
+              Sans paiement. Un seul usage: vous prévenir avant l'ouverture publique.
             </p>
           </div>
         </section>
