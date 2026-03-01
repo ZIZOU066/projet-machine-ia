@@ -4,10 +4,10 @@ const menuItems = [
   ['Produit', '#hero'],
   ['Bénéfices', '#benefices'],
   ['Comparatif', '#comparatif'],
-  ['Waitlist', '#waitlist'],
+  ['Inscription', '#waitlist'],
 ]
 
-const proofBadges = ['100kg résistance', '0.5m² au sol', '24/7 à domicile', '0 abonnement']
+const proofBadges = ['100kg résistance', '0.5m² au sol', '0 abonnement']
 
 const performanceGallery = [
   {
@@ -118,7 +118,7 @@ export default function App() {
                 {isDark ? 'Light' : 'Dark'}
               </button>
               <a href="#waitlist" className={`rounded-full px-4 py-2 text-xs font-bold transition ${theme.cta}`}>
-                Réserver ma priorité
+                S'inscrire
               </a>
             </nav>
 
@@ -167,7 +167,7 @@ export default function App() {
                   onClick={() => setMenuOpen(false)}
                   className={`rounded-xl px-4 py-3 text-sm font-bold transition ${theme.cta}`}
                 >
-                  Réserver ma priorité
+                  S'inscrire
                 </a>
               </div>
             </div>
@@ -175,7 +175,7 @@ export default function App() {
         </div>
       </header>
 
-      <main id="top" className="relative z-10 pb-16 pt-28 sm:pt-32">
+      <main id="top" className="relative z-10 pb-16 pt-24 sm:pt-28">
         <section className="mx-auto w-[min(1120px,94%)] text-center" id="hero">
           <h1 className="mx-auto max-w-5xl text-5xl font-black uppercase leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl">
             Votre salle premium.
@@ -189,9 +189,7 @@ export default function App() {
             <a href="#waitlist" className={`rounded-full px-7 py-3 text-sm font-black uppercase tracking-wide sm:text-base ${theme.cta}`}>
               Rejoindre la waitlist
             </a>
-            <a href="#comparatif" className={`rounded-full border px-7 py-3 text-sm font-black uppercase tracking-wide sm:text-base ${theme.ghost}`}>
-              DÉCOUVRIR LE SYSTÈME
-            </a>
+
           </div>
 
           <div className="mx-auto mt-5 flex max-w-3xl flex-wrap items-center justify-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] sm:gap-3">
@@ -228,14 +226,6 @@ export default function App() {
             ))}
           </div>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <a href="#waitlist" className={`rounded-full px-6 py-3 text-sm font-black uppercase tracking-wide ${theme.cta}`}>
-              Obtenir l’accès prioritaire
-            </a>
-            <span className={`self-center text-xs font-semibold uppercase tracking-[0.12em] ${theme.soft}`}>
-              Waitlist uniquement · aucune vente immédiate
-            </span>
-          </div>
         </section>
 
         <section className="mx-auto mt-14 w-[min(1120px,94%)]" id="performance">
