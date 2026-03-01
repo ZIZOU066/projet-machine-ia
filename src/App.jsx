@@ -7,43 +7,49 @@ const menuItems = [
   ['Comparatif', '#comparatif'],
 ]
 
-const compareRows = [
-  { label: 'Temps', old: 'Trajets + attente', one: '25 min. Chez vous.' },
-  { label: 'Suivi', old: 'Approx.', one: 'IA en direct' },
-  { label: 'Motivation', old: 'Variable', one: 'Rituels guidés' },
-  { label: 'Style', old: 'Basique', one: 'Objet premium' },
-]
-
-const gallery = [
-  {
-    src: '/assets/nexgym/hero-premium-interior.jpg',
-    alt: 'NEXGYM ONE dans un salon premium minimaliste',
-    tag: 'Hero premium',
-  },
-  {
-    src: '/assets/nexgym/lifestyle-home-setup.jpg',
-    alt: 'NEXGYM ONE intégré dans un home setup lifestyle',
-    tag: 'Home setup',
-  },
+const performanceGallery = [
   {
     src: '/assets/nexgym/performance-athlete-1.jpg',
     alt: 'Athlète en effort de tirage avec résistance intelligente',
-    tag: 'Performance',
   },
   {
     src: '/assets/nexgym/performance-athlete-2.jpg',
     alt: 'Athlète en sprint avec suivi biomécanique',
-    tag: 'Explosivité',
   },
   {
     src: '/assets/nexgym/performance-detail-footwork.jpg',
     alt: 'Travail de pieds avec capteur de résistance',
-    tag: 'Précision',
+  },
+]
+
+const comparisonCards = [
+  {
+    title: 'Salle de sport',
+    subtitle: 'Abonnement + trajets',
+    metrics: [
+      { label: 'Coût annuel', value: 58, hint: '≈ 1 100 €/an' },
+      { label: 'Flexibilité', value: 42, hint: 'Horaires imposés' },
+      { label: 'Suivi personnalisé', value: 36, hint: 'Souvent générique' },
+    ],
   },
   {
-    src: '/assets/nexgym/performance-athlete-woman.jpg',
-    alt: 'Athlète en exercice au sol guidé par IA',
-    tag: 'Core training',
+    title: 'Coach personnel',
+    subtitle: 'Ultra encadré, moins scalable',
+    metrics: [
+      { label: 'Coût annuel', value: 22, hint: '≈ 4 800 €/an' },
+      { label: 'Flexibilité', value: 68, hint: 'Rendez-vous à bloquer' },
+      { label: 'Suivi personnalisé', value: 95, hint: 'Très élevé' },
+    ],
+  },
+  {
+    title: 'NEXGYM ONE',
+    subtitle: 'Setup premium à domicile',
+    featured: true,
+    metrics: [
+      { label: 'Coût annuel', value: 86, hint: 'Maîtrisé sur la durée' },
+      { label: 'Flexibilité', value: 96, hint: 'Quand vous voulez' },
+      { label: 'Suivi personnalisé', value: 88, hint: 'IA guidée en direct' },
+    ],
   },
 ]
 
@@ -67,6 +73,9 @@ export default function App() {
             cta: 'bg-white text-black hover:bg-white/90',
             ghost: 'border-white/20 hover:border-white/40',
             imageOverlay: 'bg-gradient-to-t from-black/75 via-black/30 to-transparent',
+            barTrack: 'bg-white/10',
+            barFill: 'bg-gradient-to-r from-cyan-300 via-indigo-400 to-fuchsia-400',
+            featured: 'border-indigo-300/50 bg-indigo-400/10',
             fx: 'bg-[radial-gradient(circle_at_50%_0%,rgba(111,126,255,0.3),transparent_44%),radial-gradient(circle_at_0%_50%,rgba(145,0,255,0.2),transparent_40%),radial-gradient(circle_at_100%_50%,rgba(0,212,255,0.18),transparent_36%)]',
           }
         : {
@@ -82,6 +91,9 @@ export default function App() {
             cta: 'bg-[#0a0f1f] text-white hover:bg-black',
             ghost: 'border-black/20 hover:border-black/40',
             imageOverlay: 'bg-gradient-to-t from-[#0a0f1f]/55 via-[#0a0f1f]/8 to-transparent',
+            barTrack: 'bg-slate-200',
+            barFill: 'bg-gradient-to-r from-cyan-500 via-indigo-500 to-fuchsia-500',
+            featured: 'border-indigo-400/40 bg-indigo-50',
             fx: 'bg-[radial-gradient(circle_at_50%_0%,rgba(99,102,241,0.24),transparent_44%),radial-gradient(circle_at_0%_50%,rgba(124,58,237,0.14),transparent_40%),radial-gradient(circle_at_100%_50%,rgba(6,182,212,0.14),transparent_36%)]',
           },
     [isDark],
@@ -91,27 +103,27 @@ export default function App() {
     <div className={`min-h-screen overflow-x-hidden transition-colors duration-300 ${theme.root}`}>
       <div className={`pointer-events-none fixed inset-0 ${theme.fx}`} />
 
-      <header className="fixed top-4 z-50 mx-auto flex w-full justify-center px-3">
-        <div className={`w-full max-w-6xl rounded-full border px-3 py-2 backdrop-blur-2xl sm:px-5 ${theme.chip}`}>
+      <header className="fixed top-3 z-50 mx-auto flex w-full justify-center px-3 sm:top-4">
+        <div className={`w-full max-w-6xl rounded-2xl border px-3 py-2 shadow-xl backdrop-blur-2xl sm:rounded-full sm:px-5 ${theme.chip}`}>
           <div className="flex items-center justify-between gap-2">
-            <a href="#top" className="text-sm font-black tracking-[0.2em] sm:text-base">
+            <a href="#top" className="text-sm font-black tracking-[0.18em] sm:text-base">
               NEXGYM ONE
             </a>
 
             <nav className="hidden items-center gap-2 md:flex">
               {menuItems.map(([label, href]) => (
-                <a key={label} href={href} className={`rounded-full border px-4 py-2 text-xs font-semibold ${theme.ghost}`}>
+                <a key={label} href={href} className={`rounded-full border px-4 py-2 text-xs font-semibold transition ${theme.ghost}`}>
                   {label}
                 </a>
               ))}
               <button
                 type="button"
                 onClick={() => setIsDark((v) => !v)}
-                className={`rounded-full border px-4 py-2 text-xs font-semibold ${theme.ghost}`}
+                className={`rounded-full border px-4 py-2 text-xs font-semibold transition ${theme.ghost}`}
               >
                 {isDark ? 'Light' : 'Dark'}
               </button>
-              <a href="#waitlist" className={`rounded-full px-4 py-2 text-xs font-bold ${theme.cta}`}>
+              <a href="#waitlist" className={`rounded-full px-4 py-2 text-xs font-bold transition ${theme.cta}`}>
                 Rejoindre la liste d'attente
               </a>
             </nav>
@@ -120,39 +132,49 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => setIsDark((v) => !v)}
-                className={`rounded-full border px-3 py-2 text-xs font-semibold ${theme.ghost}`}
+                className={`rounded-full border px-3 py-2 text-xs font-semibold transition ${theme.ghost}`}
               >
                 {isDark ? '☀' : '☾'}
               </button>
               <button
                 type="button"
                 onClick={() => setMenuOpen((v) => !v)}
-                className={`grid h-9 w-9 place-items-center rounded-full border ${theme.ghost}`}
-                aria-label="Menu"
+                className={`relative grid h-10 w-10 place-items-center rounded-full border transition ${theme.ghost}`}
+                aria-expanded={menuOpen}
+                aria-label="Ouvrir le menu"
               >
-                <span className="text-lg leading-none">≡</span>
+                <span className="sr-only">Ouvrir le menu</span>
+                <span className={`absolute h-0.5 w-4 rounded-full bg-current transition-all duration-300 ${menuOpen ? 'translate-y-0 rotate-45' : '-translate-y-1.5'}`} />
+                <span className={`absolute h-0.5 w-4 rounded-full bg-current transition-all duration-300 ${menuOpen ? 'opacity-0' : 'opacity-100'}`} />
+                <span className={`absolute h-0.5 w-4 rounded-full bg-current transition-all duration-300 ${menuOpen ? 'translate-y-0 -rotate-45' : 'translate-y-1.5'}`} />
               </button>
             </div>
           </div>
 
-          {menuOpen && (
-            <div className={`mt-3 grid gap-2 rounded-2xl border p-2 md:hidden ${theme.menuPanel}`}>
-              {[...menuItems, ["Liste d'attente", '#waitlist']].map(([label, href]) => (
-                <a
-                  key={label}
-                  href={href}
-                  onClick={() => setMenuOpen(false)}
-                  className={`rounded-xl border px-4 py-3 text-sm font-semibold ${theme.menuItem}`}
-                >
-                  {label}
-                </a>
-              ))}
+          <div
+            className={`grid transition-all duration-300 ease-out md:hidden ${
+              menuOpen ? 'mt-3 grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+            }`}
+          >
+            <div className="overflow-hidden">
+              <div className={`grid gap-2 rounded-2xl border p-2 ${theme.menuPanel}`}>
+                {[...menuItems, ["Liste d'attente", '#waitlist']].map(([label, href]) => (
+                  <a
+                    key={label}
+                    href={href}
+                    onClick={() => setMenuOpen(false)}
+                    className={`rounded-xl border px-4 py-3 text-sm font-semibold transition ${theme.menuItem}`}
+                  >
+                    {label}
+                  </a>
+                ))}
+              </div>
             </div>
-          )}
+          </div>
         </div>
       </header>
 
-      <main id="top" className="relative z-10 pb-20 pt-28">
+      <main id="top" className="relative z-10 pb-20 pt-28 sm:pt-32">
         <section className="mx-auto w-[min(1100px,94%)] text-center" id="impact">
           <p className="inline-flex rounded-full border border-fuchsia-400/40 bg-fuchsia-400/10 px-4 py-1 text-[11px] font-bold uppercase tracking-[0.22em] text-fuchsia-300">
             Waitlist privée · Stock limité
@@ -223,7 +245,7 @@ export default function App() {
             </p>
 
             <div className="mt-7 grid gap-4 sm:grid-cols-3">
-              {gallery.slice(2, 5).map((item) => (
+              {performanceGallery.map((item) => (
                 <figure key={item.src} className="overflow-hidden rounded-2xl border border-current/10">
                   <img src={item.src} alt={item.alt} className="h-64 w-full object-cover" />
                 </figure>
@@ -232,41 +254,38 @@ export default function App() {
           </article>
         </section>
 
-        <section id="comparatif" className="mx-auto mt-16 w-[min(900px,94%)]">
-          <div className={`overflow-hidden rounded-[2rem] border ${theme.shellSoft}`}>
-            <div className="grid grid-cols-3 border-b border-current/10 p-4 text-[10px] font-black uppercase tracking-[0.2em] sm:text-xs">
-              <span>Critère</span>
-              <span>Ancien monde</span>
-              <span>NEXGYM ONE</span>
-            </div>
-            {compareRows.map((row) => (
-              <div key={row.label} className={`grid grid-cols-3 p-4 text-xs font-semibold uppercase tracking-[0.08em] sm:text-sm ${theme.muted}`}>
-                <span className="font-black text-current">{row.label}</span>
-                <span>{row.old}</span>
-                <span className="font-black text-current">{row.one}</span>
-              </div>
-            ))}
-          </div>
-        </section>
+        <section id="comparatif" className="mx-auto mt-16 w-[min(1100px,94%)]">
+          <div className={`rounded-[2rem] border p-6 sm:p-8 ${theme.shellSoft}`}>
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-violet-400">Comparatif express</p>
+            <h3 className="mt-3 text-3xl font-black uppercase sm:text-4xl">Le premium se voit en 3 métriques.</h3>
+            <p className={`mt-3 text-xs font-semibold uppercase tracking-[0.1em] sm:text-sm ${theme.muted}`}>
+              Plus la barre est haute, plus l'option est avantageuse pour votre quotidien.
+            </p>
 
-        <section className="mx-auto mt-16 w-[min(1100px,94%)]">
-          <div className={`rounded-[2rem] border p-5 sm:p-6 ${theme.shell}`}>
-            <div className="mb-4 flex items-center justify-between gap-4">
-              <h3 className="text-xl font-black uppercase sm:text-2xl">Galerie compacte</h3>
-              <span className={`text-[11px] font-bold uppercase tracking-[0.16em] ${theme.soft}`}>6 visuels premium</span>
-            </div>
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-6">
-              {gallery.map((item) => (
-                <figure key={item.src} className="group relative overflow-hidden rounded-xl border border-current/10">
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    className="h-28 w-full object-cover transition duration-300 group-hover:scale-105 md:h-36"
-                  />
-                  <figcaption className="absolute inset-x-0 bottom-0 bg-black/45 px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-white">
-                    {item.tag}
-                  </figcaption>
-                </figure>
+            <div className="mt-8 grid gap-4 md:grid-cols-3">
+              {comparisonCards.map((option) => (
+                <article
+                  key={option.title}
+                  className={`rounded-2xl border p-5 transition ${theme.shell} ${option.featured ? theme.featured : ''}`}
+                >
+                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-cyan-400">{option.subtitle}</p>
+                  <h4 className="mt-2 text-xl font-black uppercase">{option.title}</h4>
+
+                  <div className="mt-5 space-y-4">
+                    {option.metrics.map((metric) => (
+                      <div key={metric.label}>
+                        <div className="mb-1 flex items-center justify-between gap-3 text-[11px] font-bold uppercase tracking-[0.12em]">
+                          <span className={theme.muted}>{metric.label}</span>
+                          <span>{metric.value}%</span>
+                        </div>
+                        <div className={`h-2.5 w-full overflow-hidden rounded-full ${theme.barTrack}`}>
+                          <div className={`h-full rounded-full ${theme.barFill}`} style={{ width: `${metric.value}%` }} />
+                        </div>
+                        <p className={`mt-1 text-[10px] font-semibold uppercase tracking-[0.08em] ${theme.soft}`}>{metric.hint}</p>
+                      </div>
+                    ))}
+                  </div>
+                </article>
               ))}
             </div>
           </div>
