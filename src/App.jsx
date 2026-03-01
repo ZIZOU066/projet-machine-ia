@@ -21,7 +21,7 @@ const performanceGallery = [
     text: 'Augmentez votre endurance avec des séances dynamiques adaptées à votre rythme.',
   },
   {
-    src: '/assets/nexgym/file_275---1ff9b3da-16b0-441b-aa37-2930485dbc88.jpg',
+    src: '/assets/nexgym/performance-athlete-woman-new.jpg',
     alt: 'Athlète en mouvement pour mobilité et contrôle',
     title: 'Mobilité & contrôle',
     text: 'Améliorez vos amplitudes et la qualité de mouvement au quotidien.',
