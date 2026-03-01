@@ -256,7 +256,7 @@ export default function App() {
         <section className="mx-auto mt-14 w-[min(1100px,94%)]" id="performance">
           <article className={`rounded-[2rem] border p-6 sm:p-8 ${theme.shell}`}>
             <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-cyan-400">Un système. Quatre piliers d’entraînement</p>
-            <h2 className="mt-3 text-3xl font-black uppercase sm:text-5xl">4 piliers pour progresser plus vite, sans compromis.</h2>
+            <h2 className="mt-3 text-3xl font-black uppercase sm:text-5xl">PROGRESSEZ PLUS VITE, SANS COMPROMIS</h2>
             <p className={`mt-4 text-sm font-semibold uppercase tracking-[0.1em] ${theme.muted}`}>
               Un seul système pour la force, le cardio, la mobilité et la récupération.
             </p>
