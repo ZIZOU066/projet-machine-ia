@@ -11,7 +11,7 @@ export default function WaitlistSection() {
   }
 
   return (
-    <section id="acces-anticipe" className="pb-24 pt-20 sm:pb-28 sm:pt-24">
+    <section id="waitlist" className="pb-24 pt-20 sm:pb-28 sm:pt-24">
       <Container>
         <div className="rounded-[2rem] border border-line bg-panel p-7 shadow-soft sm:p-10 lg:p-12">
           <p className="text-xs font-semibold uppercase tracking-[0.15em] text-slate">Accès prioritaire quand le stock revient</p>

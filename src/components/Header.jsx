@@ -20,7 +20,7 @@ export default function Header({ navLinks }) {
               </a>
             ))}
             <a
-              href="#acces-anticipe"
+              href="#acces-prioritaire"
               className="rounded-full bg-ink px-5 py-2 text-sm font-semibold text-white transition hover:opacity-90"
             >
               Rejoindre la waitlist
@@ -50,7 +50,7 @@ export default function Header({ navLinks }) {
                 </a>
               ))}
               <a
-                href="#acces-anticipe"
+                href="#acces-prioritaire"
                 className="mt-2 rounded-xl bg-ink px-4 py-3 text-center text-sm font-semibold text-white"
                 onClick={() => setOpen(false)}
               >

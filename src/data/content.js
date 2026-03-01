@@ -49,27 +49,27 @@ export const prioritySteps = [
 ]
 
 export const premiumTargets = [
-  'Hôtellerie premium: suites et espaces d’accueil signature.',
-  'Yachts & maritime luxe: expérience client différenciante à bord.',
-  'Villas et conciergeries privées: service haut de gamme plus mémorable.',
-  'Influenceurs & athlètes: image premium cohérente avec un lifestyle exigeant.',
+  'Hôtels premium: suites, lobbies et espaces signature.',
+  'Yachts privés: une expérience élégante et mémorable à bord.',
+  'Villas haut de gamme: présence forte, sans encombrer l’espace.',
+  'Coaching premium: un accompagnement différenciant au quotidien.',
 ]
 
 export const objections = [
   {
-    q: 'Le positionnement semble premium: pourquoi rejoindre maintenant ?',
-    a: 'Justement pour sécuriser une place prioritaire avant le prochain retour stock et bénéficier des meilleures conditions d’accès.',
+    q: 'Le prix sera-t-il élevé ?',
+    a: 'Le positionnement est premium, oui. L’inscription à la waitlist reste gratuite et vous permet d’être informé en priorité des conditions de lancement.',
   },
   {
-    q: 'Il existe des alternatives, qu’est-ce qui change ici ?',
-    a: 'La différence est dans l’expérience globale: design, exclusivité, accompagnement européen et exécution sans compromis.',
+    q: 'J’ai vu des alternatives, pourquoi vous choisir ?',
+    a: 'Ici, la différence tient à l’ensemble: design premium, concept encore inédit en France, gain de place et vraie qualité d’accompagnement.',
   },
   {
-    q: 'Comment être sûr de la crédibilité de la marque ?',
-    a: 'Nous misons sur la transparence, le service et une sélection progressive des accès pour maintenir un niveau d’exigence élevé.',
+    q: 'Quel niveau de SAV proposez-vous ?',
+    a: 'SAV européen, suivi réactif et garantie incluse: notre priorité est une expérience fiable, avant et après livraison.',
   },
   {
-    q: 'Faut-il payer pour s’inscrire ?',
-    a: 'Non. La waitlist est 100% gratuite, sans carte bancaire et sans engagement.',
+    q: 'Quand le produit sera-t-il à nouveau disponible ?',
+    a: 'Le retour est proche, mais les quantités seront limitées. Les inscrits à la waitlist sont contactés en premier, avant l’ouverture publique.',
   },
 ]

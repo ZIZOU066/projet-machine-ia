@@ -6,10 +6,11 @@ export default function PriorityAccessSection({ steps }) {
     <section id="acces-prioritaire" className="py-20 sm:py-24">
       <Container>
         <SectionTitle
-          eyebrow="Accès prioritaire quand le stock revient"
-          title="Un processus simple et transparent"
-          description="Pas de paiement, pas de promesse floue: uniquement une priorisation claire au redémarrage."
+          eyebrow="Accès prioritaire"
+          title="Comment ça fonctionne dès le retour du stock"
+          description="Processus simple, sans paiement, sans engagement: vous êtes prévenu avant l’ouverture publique."
         />
+
         <div className="grid gap-5 md:grid-cols-3">
           {steps.map((step) => (
             <article key={step.title} className="rounded-3xl border border-line bg-panel p-7 shadow-soft">
