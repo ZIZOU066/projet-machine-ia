@@ -180,11 +180,11 @@ export default function App() {
             Waitlist privée · Stock limité
           </p>
           <h1 className="mx-auto mt-6 max-w-5xl text-5xl font-black uppercase leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl">
-            Le futur du training.
-            <span className={`block ${theme.strong}`}>Maintenant chez vous.</span>
+            La performance haut niveau.
+            <span className={`block ${theme.strong}`}>Directement chez vous.</span>
           </h1>
           <p className={`mx-auto mt-6 max-w-2xl text-sm font-medium uppercase tracking-[0.16em] sm:text-base ${theme.muted}`}>
-            Rupture en cours. Prochaine vague réservée aux inscrits.
+            NEXGYM ONE revient bientôt. Inscrivez-vous pour être informé en priorité.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
