@@ -1,248 +1,290 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { t } from './i18n/translations'
 
-const menuItems = [
-  ['Produit', '#hero'],
-  ['Bénéfices', '#benefices'],
-  ['Comparatif', '#comparatif'],
-  ['Inscription', '#waitlist'],
-]
-
-const proofBadges = ['100kg résistance', '0.5m² au sol', '0 abonnement']
+const SPOTS_LEFT = 87
 
 const performanceGallery = [
   {
     src: '/assets/nexgym/performance-athlete-1.jpg',
-    alt: 'Athlète en effort de force avec résistance intelligente',
-    title: 'Force progressive',
-    text: 'Résistance digitale jusqu’à 100kg pour développer puissance et contrôle sans surcharger votre espace.',
+    altKey: 'strength',
+    titleKey: 'strength',
+    textKey: 'strengthText',
   },
   {
     src: '/assets/nexgym/performance-athlete-2.jpg',
-    alt: 'Athlète en effort cardio et conditionnement',
-    title: 'Cardio intelligent',
-    text: 'Séances rythmées et adaptatives pour maintenir un haut niveau d’intensité sans déplacement.',
+    altKey: 'cardio',
+    titleKey: 'cardio',
+    textKey: 'cardioText',
   },
   {
     src: '/assets/nexgym/performance-athlete-woman-new.jpg',
-    alt: 'Athlète en mouvement pour mobilité et contrôle',
-    title: 'Mobilité utile',
-    text: 'Travail des amplitudes et du gainage pour mieux bouger au quotidien, avec plus de fluidité.',
+    altKey: 'mobility',
+    titleKey: 'mobility',
+    textKey: 'mobilityText',
   },
   {
     src: '/assets/nexgym/performance-detail-footwork.jpg',
-    alt: 'Travail de pieds et récupération active',
-    title: 'RÉCUPÉRATION OPTIMISÉE',
-    text: 'Programmes guidés pour enchaîner entraînement et récupération sans casser votre rythme.',
+    altKey: 'recovery',
+    titleKey: 'recovery',
+    textKey: 'recoveryText',
   },
 ]
 
-const benefits = [
-  {
-    title: 'Un setup premium chez vous',
-    text: 'NEXGYM ONE s’intègre dans 0.5m² et transforme instantanément votre intérieur en espace d’entraînement.',
-  },
-  {
-    title: 'Disponibilité totale',
-    text: 'Vous vous entraînez quand vous voulez, 24/7, sans trajets ni dépendance aux horaires d’une salle.',
-  },
-  {
-    title: 'Coût maîtrisé',
-    text: 'Un achat, pas d’abonnement mensuel. Vous investissez dans votre performance, pas dans des frais récurrents.',
-  },
+const LANG_OPTIONS = [
+  { code: 'fr', label: 'FR' },
+  { code: 'en', label: 'EN' },
 ]
 
 export default function App() {
-  const [isDark, setIsDark] = useState(true)
+  const [lang, setLang] = useState('fr')
   const [menuOpen, setMenuOpen] = useState(false)
+  const [openFaq, setOpenFaq] = useState(null)
+
+  const T = useMemo(() => t[lang], [lang])
+
+  useEffect(() => {
+    document.documentElement.lang = lang
+  }, [lang])
 
   const theme = useMemo(
-    () =>
-      isDark
-        ? {
-            root: 'bg-[#06070a] text-white',
-            shell: 'border-white/15 bg-white/[0.04]',
-            shellSoft: 'border-white/10 bg-white/[0.03]',
-            chip: 'border-white/15 bg-black/45 text-white',
-            menuPanel: 'border-white/20 bg-[#0d1018]/95 text-white shadow-[0_18px_45px_rgba(0,0,0,0.5)]',
-            menuItem: 'border-white/15 bg-white/[0.03] hover:bg-white/[0.08] text-white',
-            muted: 'text-white/72',
-            soft: 'text-white/55',
-            strong: 'text-[#a4adff]',
-            cta: 'bg-white text-black hover:bg-white/90',
-            ghost: 'border-white/20 hover:border-white/40',
-            imageOverlay: 'bg-gradient-to-t from-black/75 via-black/30 to-transparent',
-            featured: 'border-[#86a3ff] bg-[#8ea6ff]/12 shadow-[0_0_0_1px_rgba(154,180,255,0.35),0_18px_40px_rgba(80,105,255,0.18)]',
-            fx: 'bg-[radial-gradient(circle_at_50%_0%,rgba(111,126,255,0.3),transparent_44%),radial-gradient(circle_at_0%_50%,rgba(145,0,255,0.2),transparent_40%),radial-gradient(circle_at_100%_50%,rgba(0,212,255,0.18),transparent_36%)]',
-          }
-        : {
-            root: 'bg-[#f5f7ff] text-[#0a0f1f]',
-            shell: 'border-black/10 bg-white/95',
-            shellSoft: 'border-black/10 bg-white',
-            chip: 'border-black/15 bg-white/90 text-[#0a0f1f]',
-            menuPanel: 'border-black/15 bg-white text-[#0a0f1f] shadow-[0_16px_40px_rgba(15,23,42,0.16)]',
-            menuItem: 'border-black/10 bg-[#f7f9ff] hover:bg-white text-[#0a0f1f]',
-            muted: 'text-slate-700',
-            soft: 'text-slate-500',
-            strong: 'text-indigo-700',
-            cta: 'bg-[#0a0f1f] text-white hover:bg-black',
-            ghost: 'border-black/20 hover:border-black/40',
-            imageOverlay: 'bg-gradient-to-t from-[#0a0f1f]/55 via-[#0a0f1f]/8 to-transparent',
-            featured: 'border-[#5f7dff] bg-[#eef2ff] shadow-[0_0_0_1px_rgba(95,125,255,0.28),0_16px_30px_rgba(95,125,255,0.15)]',
-            fx: 'bg-[radial-gradient(circle_at_50%_0%,rgba(99,102,241,0.24),transparent_44%),radial-gradient(circle_at_0%_50%,rgba(124,58,237,0.14),transparent_40%),radial-gradient(circle_at_100%_50%,rgba(6,182,212,0.14),transparent_36%)]',
-          },
-    [isDark],
+    () => ({
+      root: 'bg-[#06070a] text-white',
+      shell: 'border-white/12 bg-white/[0.04]',
+      shellSoft: 'border-white/10 bg-white/[0.03]',
+      muted: 'text-white/70',
+      soft: 'text-white/50',
+      strong: 'text-[#a4adff]',
+      cta: 'bg-white text-black hover:bg-white/90',
+      imageOverlay: 'bg-gradient-to-t from-black/80 via-black/25 to-transparent',
+      featured: 'border-[#86a3ff] bg-[#8ea6ff]/10 shadow-[0_0_0_1px_rgba(154,180,255,0.3),0_18px_40px_rgba(80,105,255,0.15)]',
+      fx: 'bg-[radial-gradient(circle_at_50%_0%,rgba(111,126,255,0.25),transparent_50%),radial-gradient(circle_at_80%_80%,rgba(145,0,255,0.12),transparent_45%)]',
+      input: 'border-white/20 bg-white/5 text-white placeholder-white/40 focus:border-white/40 focus:ring-2 focus:ring-white/20 outline-none',
+    }),
+    [],
   )
 
+  const navLinks = [
+    [T.nav.product, '#hero'],
+    [T.nav.benefits, '#benefices'],
+    [T.nav.forWho, '#pour-qui'],
+    [T.nav.compare, '#comparatif'],
+    [T.nav.faq, '#faq'],
+  ]
+
+  const faqItems = [
+    [T.faq.q1, T.faq.a1],
+    [T.faq.q2, T.faq.a2],
+    [T.faq.q3, T.faq.a3],
+    [T.faq.q4, T.faq.a4],
+  ]
+
   return (
-    <div className={`min-h-screen overflow-x-hidden transition-colors duration-300 ${theme.root}`}>
-      <div className={`pointer-events-none fixed inset-0 ${theme.fx}`} />
+    <div className={`min-h-screen overflow-x-hidden ${theme.root}`}>
+      <div className={`pointer-events-none fixed inset-0 ${theme.fx}`} aria-hidden />
 
-      <header className="fixed top-3 z-50 mx-auto flex w-full justify-center px-3 sm:top-4">
-        <div className={`w-full max-w-6xl rounded-2xl border px-3 py-2 shadow-xl backdrop-blur-2xl sm:rounded-full sm:px-5 ${theme.chip}`}>
-          <div className="flex items-center justify-between gap-2">
-            <a href="#top" className="text-sm font-black tracking-[0.14em] sm:text-base">
-              NEXGYM ONE
-            </a>
+      {/* Header: clean nav, no chips */}
+      <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-[#06070a]/85 backdrop-blur-xl">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          <a href="#top" className="text-lg font-bold tracking-[0.12em] text-white">
+            NEXGYM ONE
+          </a>
 
-            <nav className="hidden items-center gap-2 md:flex">
-              {menuItems.map(([label, href]) => (
-                <a key={label} href={href} className={`rounded-full border px-4 py-2 text-xs font-semibold transition ${theme.ghost}`}>
+          <nav className="hidden items-center gap-8 md:flex">
+            {navLinks.map(([label, href]) => (
+              <a
+                key={href}
+                href={href}
+                className="text-sm font-medium text-white/80 transition hover:text-white"
+              >
+                {label}
+              </a>
+            ))}
+
+            <div className="ml-2 flex items-center gap-3">
+              <div className="flex rounded-lg border border-white/15 bg-white/5 p-0.5">
+                {LANG_OPTIONS.map(({ code, label }) => (
+                  <button
+                    key={code}
+                    type="button"
+                    onClick={() => setLang(code)}
+                    className={`rounded-md px-3 py-1.5 text-xs font-semibold transition ${
+                      lang === code ? 'bg-white text-black' : 'text-white/70 hover:text-white'
+                    }`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+              <a
+                href="#waitlist"
+                className="rounded-full bg-white px-5 py-2.5 text-sm font-bold text-black transition hover:bg-white/90"
+              >
+                {T.nav.cta}
+              </a>
+            </div>
+          </nav>
+
+          {/* Mobile: menu + lang + CTA */}
+          <div className="flex items-center gap-2 md:hidden">
+            <div className="flex rounded-lg border border-white/15 bg-white/5 p-0.5">
+              {LANG_OPTIONS.map(({ code, label }) => (
+                <button
+                  key={code}
+                  type="button"
+                  onClick={() => setLang(code)}
+                  className={`rounded-md px-2.5 py-1 text-xs font-semibold ${
+                    lang === code ? 'bg-white text-black' : 'text-white/70'
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={() => setMenuOpen((v) => !v)}
+              className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-lg border border-white/15 bg-white/5"
+              aria-expanded={menuOpen}
+              aria-label="Menu"
+            >
+              <span className={`h-0.5 w-5 rounded-full bg-white transition ${menuOpen ? 'translate-y-2 rotate-45' : ''}`} />
+              <span className={`h-0.5 w-5 rounded-full bg-white transition ${menuOpen ? 'opacity-0' : ''}`} />
+              <span className={`h-0.5 w-5 rounded-full bg-white transition ${menuOpen ? '-translate-y-2 -rotate-45' : ''}`} />
+            </button>
+          </div>
+        </div>
+
+        {menuOpen && (
+          <div className="border-t border-white/10 bg-[#0a0d14] px-4 py-4 md:hidden">
+            <div className="flex flex-col gap-1">
+              {navLinks.map(([label, href]) => (
+                <a
+                  key={href}
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className="rounded-lg px-4 py-3 text-sm font-medium text-white/90 hover:bg-white/10"
+                >
                   {label}
                 </a>
               ))}
-              <button
-                type="button"
-                onClick={() => setIsDark((v) => !v)}
-                className={`rounded-full border px-4 py-2 text-xs font-semibold transition ${theme.ghost}`}
+              <a
+                href="#waitlist"
+                onClick={() => setMenuOpen(false)}
+                className="mt-2 rounded-full bg-white px-4 py-3 text-center text-sm font-bold text-black"
               >
-                {isDark ? 'Light' : 'Dark'}
-              </button>
-              <a href="#waitlist" className={`rounded-full px-4 py-2 text-xs font-bold transition ${theme.cta}`}>
-                S'inscrire
+                {T.nav.cta}
               </a>
-            </nav>
-
-            <div className="flex items-center gap-2 md:hidden">
-              <button
-                type="button"
-                onClick={() => setIsDark((v) => !v)}
-                className={`rounded-full border px-3 py-2 text-xs font-semibold transition ${theme.ghost}`}
-              >
-                {isDark ? '☀' : '☾'}
-              </button>
-              <button
-                type="button"
-                onClick={() => setMenuOpen((v) => !v)}
-                className={`relative grid h-10 w-10 place-items-center rounded-full border transition ${theme.ghost}`}
-                aria-expanded={menuOpen}
-                aria-label="Ouvrir le menu"
-              >
-                <span className="sr-only">Ouvrir le menu</span>
-                <span className={`absolute h-0.5 w-4 rounded-full bg-current transition-all duration-300 ${menuOpen ? 'translate-y-0 rotate-45' : '-translate-y-1.5'}`} />
-                <span className={`absolute h-0.5 w-4 rounded-full bg-current transition-all duration-300 ${menuOpen ? 'opacity-0' : 'opacity-100'}`} />
-                <span className={`absolute h-0.5 w-4 rounded-full bg-current transition-all duration-300 ${menuOpen ? 'translate-y-0 -rotate-45' : 'translate-y-1.5'}`} />
-              </button>
             </div>
           </div>
-
-          <div
-            className={`grid transition-all duration-300 ease-out md:hidden ${
-              menuOpen ? 'mt-3 grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
-            }`}
-          >
-            <div className="overflow-hidden">
-              <div className={`grid gap-2 rounded-2xl border p-2 ${theme.menuPanel}`}>
-                {menuItems.map(([label, href]) => (
-                  <a
-                    key={label}
-                    href={href}
-                    onClick={() => setMenuOpen(false)}
-                    className={`rounded-xl border px-4 py-3 text-sm font-semibold transition ${theme.menuItem}`}
-                  >
-                    {label}
-                  </a>
-                ))}
-                <a
-                  href="#waitlist"
-                  onClick={() => setMenuOpen(false)}
-                  className={`rounded-xl px-4 py-3 text-sm font-bold transition ${theme.cta}`}
-                >
-                  S'inscrire
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+        )}
       </header>
 
-      <main id="top" className="relative z-10 pb-16 pt-24 sm:pt-28">
+      <main id="top" className="relative z-10 pt-24 pb-20">
+        {/* Hero */}
         <section className="mx-auto w-[min(1120px,94%)] text-center" id="hero">
-          <h1 className="mx-auto max-w-5xl text-5xl font-black uppercase leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl">
-            Votre salle premium.
-            <span className={`block ${theme.strong}`}>Sans quitter la maison.</span>
+          <h1 className="mx-auto max-w-5xl text-4xl font-black uppercase leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+            {T.hero.title}
+            <span className={`mt-2 block ${theme.strong}`}>{T.hero.titleHighlight}</span>
           </h1>
-          <p className={`mx-auto mt-6 max-w-2xl text-sm font-medium uppercase tracking-[0.12em] sm:text-base ${theme.muted}`}>
-            NEXGYM ONE revient bientôt. Rejoignez la waitlist privée pour un accès prioritaire au prochain lancement.
+          <p className={`mx-auto mt-6 max-w-2xl text-base leading-relaxed sm:text-lg ${theme.muted}`}>
+            {T.hero.subtitle}
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <a href="#waitlist" className={`rounded-full px-7 py-3 text-sm font-black uppercase tracking-wide sm:text-base ${theme.cta}`}>
-              Rejoindre la waitlist
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <a
+              href="#waitlist"
+              className={`rounded-full px-8 py-4 text-sm font-black uppercase tracking-wide transition ${theme.cta}`}
+            >
+              {T.hero.cta}
             </a>
-
           </div>
 
-          <div className="mx-auto mt-5 flex max-w-3xl flex-wrap items-center justify-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] sm:gap-3">
-            {proofBadges.map((badge) => (
-              <span key={badge} className={`rounded-full border px-3 py-2 ${theme.shellSoft}`}>
-                {badge}
-              </span>
-            ))}
+          <p className={`mt-4 text-sm font-semibold ${theme.strong}`}>{T.hero.fomo}</p>
+
+          <div className="mx-auto mt-6 flex max-w-2xl flex-wrap items-center justify-center gap-3 text-xs font-bold uppercase tracking-wider text-white/80">
+            <span className="rounded-full border border-white/15 bg-white/5 px-4 py-2">{T.hero.badge1}</span>
+            <span className="rounded-full border border-white/15 bg-white/5 px-4 py-2">{T.hero.badge2}</span>
+            <span className="rounded-full border border-white/15 bg-white/5 px-4 py-2">{T.hero.badge3}</span>
           </div>
 
-          <article className={`relative mt-10 overflow-hidden rounded-[2.2rem] border ${theme.shell}`}>
+          <article className="relative mt-12 overflow-hidden rounded-3xl border border-white/12">
             <img
               src="/assets/nexgym/hero-premium-interior.jpg"
-              alt="Machine NEXGYM ONE dans un intérieur premium"
-              className="h-[420px] w-full object-cover sm:h-[530px]"
+              alt="NEXGYM ONE in a premium interior"
+              className="h-[380px] w-full object-cover sm:h-[500px]"
             />
             <div className={`absolute inset-0 ${theme.imageOverlay}`} />
-            <div className="absolute inset-x-0 bottom-0 p-6 text-left sm:p-8">
-              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-cyan-300">NEXGYM ONE</p>
-              <h2 className="mt-3 max-w-xl text-2xl font-black uppercase leading-tight sm:text-4xl">
-                Un seul système pour entraîner force, cardio, mobilité et récupération.
+            <div className="absolute inset-x-0 bottom-0 p-6 text-left sm:p-10">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-300">{T.hero.heroLabel}</p>
+              <h2 className="mt-2 max-w-2xl text-2xl font-black uppercase leading-tight sm:text-4xl">
+                {T.hero.heroTitle}
               </h2>
             </div>
           </article>
         </section>
 
-        <section className="mx-auto mt-14 w-[min(1120px,94%)]" id="benefices">
-          <div className="grid gap-4 md:grid-cols-3">
-            {benefits.map((item) => (
-              <article key={item.title} className={`rounded-[1.6rem] border p-6 ${theme.shell}`}>
-                <h3 className="text-lg font-black uppercase">{item.title}</h3>
-                <p className={`mt-3 text-sm leading-relaxed ${theme.muted}`}>{item.text}</p>
-              </article>
-            ))}
-          </div>
+        {/* Pour qui: particuliers, hôtels, yachts, résidences */}
+        <section className="mx-auto mt-20 w-[min(1120px,94%)]" id="pour-qui">
+          <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-cyan-400">{T.forWho.eyebrow}</p>
+          <h2 className="mt-3 text-center text-3xl font-black uppercase sm:text-4xl">{T.forWho.title}</h2>
+          <p className={`mx-auto mt-3 max-w-2xl text-center text-sm ${theme.muted}`}>{T.forWho.subtitle}</p>
 
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <article className={`rounded-2xl border p-6 ${theme.shell}`}>
+              <div className="text-2xl">🏠</div>
+              <h3 className="mt-3 text-lg font-black uppercase">{T.forWho.home}</h3>
+              <p className={`mt-2 text-sm leading-relaxed ${theme.muted}`}>{T.forWho.homeDesc}</p>
+            </article>
+            <article className={`rounded-2xl border p-6 ${theme.shell}`}>
+              <div className="text-2xl">🏨</div>
+              <h3 className="mt-3 text-lg font-black uppercase">{T.forWho.hotels}</h3>
+              <p className={`mt-2 text-sm leading-relaxed ${theme.muted}`}>{T.forWho.hotelsDesc}</p>
+            </article>
+            <article className={`rounded-2xl border p-6 ${theme.shell}`}>
+              <div className="text-2xl">🛥️</div>
+              <h3 className="mt-3 text-lg font-black uppercase">{T.forWho.yachts}</h3>
+              <p className={`mt-2 text-sm leading-relaxed ${theme.muted}`}>{T.forWho.yachtsDesc}</p>
+            </article>
+            <article className={`rounded-2xl border p-6 ${theme.shell}`}>
+              <div className="text-2xl">✨</div>
+              <h3 className="mt-3 text-lg font-black uppercase">{T.forWho.residences}</h3>
+              <p className={`mt-2 text-sm leading-relaxed ${theme.muted}`}>{T.forWho.residencesDesc}</p>
+            </article>
+          </div>
         </section>
 
-        <section className="mx-auto mt-14 w-[min(1120px,94%)]" id="performance">
-          <article className={`rounded-[2rem] border p-6 sm:p-8 ${theme.shell}`}>
-            <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-cyan-400">Entraînement complet</p>
-            <h2 className="mt-3 text-3xl font-black uppercase sm:text-5xl">4 piliers. 1 machine. Aucun compromis.</h2>
-            <p className={`mt-4 text-sm font-semibold uppercase tracking-[0.08em] ${theme.muted}`}>
-              Chaque bloc ci-dessous répond à un objectif différent, sans répéter la même promesse.
-            </p>
+        {/* Bénéfices */}
+        <section className="mx-auto mt-20 w-[min(1120px,94%)]" id="benefices">
+          <div className="grid gap-4 md:grid-cols-3">
+            <article className={`rounded-2xl border p-6 ${theme.shell}`}>
+              <h3 className="text-lg font-black uppercase">{T.benefits.title1}</h3>
+              <p className={`mt-3 text-sm leading-relaxed ${theme.muted}`}>{T.benefits.text1}</p>
+            </article>
+            <article className={`rounded-2xl border p-6 ${theme.shell}`}>
+              <h3 className="text-lg font-black uppercase">{T.benefits.title2}</h3>
+              <p className={`mt-3 text-sm leading-relaxed ${theme.muted}`}>{T.benefits.text2}</p>
+            </article>
+            <article className={`rounded-2xl border p-6 ${theme.shell}`}>
+              <h3 className="text-lg font-black uppercase">{T.benefits.title3}</h3>
+              <p className={`mt-3 text-sm leading-relaxed ${theme.muted}`}>{T.benefits.text3}</p>
+            </article>
+          </div>
+        </section>
 
-            <div className="mt-7 grid gap-4 sm:grid-cols-2">
-              {performanceGallery.map((item) => (
-                <figure key={item.src} className={`overflow-hidden rounded-2xl border ${theme.shellSoft}`}>
-                  <img src={item.src} alt={item.alt} className="h-56 w-full object-cover sm:h-64" />
+        {/* 4 piliers */}
+        <section className="mx-auto mt-20 w-[min(1120px,94%)]" id="performance">
+          <article className={`rounded-2xl border p-6 sm:p-8 ${theme.shell}`}>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-400">{T.performance.eyebrow}</p>
+            <h2 className="mt-3 text-3xl font-black uppercase sm:text-4xl">{T.performance.title}</h2>
+            <p className={`mt-3 text-sm ${theme.muted}`}>{T.performance.subtitle}</p>
+
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              {performanceGallery.map((item, i) => (
+                <figure key={i} className={`overflow-hidden rounded-xl border ${theme.shell}`}>
+                  <img src={item.src} alt="" className="h-52 w-full object-cover sm:h-56" />
                   <figcaption className="p-4">
-                    <p className="text-sm font-black uppercase tracking-[0.08em]">{item.title}</p>
-                    <p className={`mt-2 text-xs leading-relaxed ${theme.muted}`}>{item.text}</p>
+                    <p className="text-sm font-black uppercase">{T.performance[item.titleKey]}</p>
+                    <p className={`mt-2 text-xs leading-relaxed ${theme.muted}`}>{T.performance[item.textKey]}</p>
                   </figcaption>
                 </figure>
               ))}
@@ -250,100 +292,118 @@ export default function App() {
           </article>
         </section>
 
-        <section id="comparatif" className="mx-auto mt-16 w-[min(1120px,94%)]">
-          <div className={`rounded-[2rem] border p-6 sm:p-8 ${theme.shellSoft}`}>
-            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-violet-400">Comparatif réel</p>
-            <h3 className="mt-3 text-3xl font-black uppercase sm:text-4xl">Pourquoi NEXGYM ONE prend l’avantage</h3>
-            <p className={`mt-3 text-sm leading-relaxed ${theme.muted}`}>
-              Même objectif: progresser. Mais sans subir contraintes de déplacements, d’abonnements ou de planning figé.
-            </p>
+        {/* Comparatif */}
+        <section id="comparatif" className="mx-auto mt-20 w-[min(1120px,94%)]">
+          <div className={`rounded-2xl border p-6 sm:p-8 ${theme.shell}`}>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-violet-400">{T.compare.eyebrow}</p>
+            <h3 className="mt-3 text-3xl font-black uppercase sm:text-4xl">{T.compare.title}</h3>
+            <p className={`mt-3 text-sm leading-relaxed ${theme.muted}`}>{T.compare.subtitle}</p>
 
             <div className="mt-8 grid gap-4 md:grid-cols-3">
-              <article className={`rounded-2xl border p-5 ${theme.shell}`}>
-                <h4 className="text-lg font-black uppercase">Salle de sport</h4>
-                <p className={`mt-3 text-sm leading-relaxed ${theme.muted}`}>
-                  Matériel mutualisé, pics d’affluence, horaires imposés et abonnement mensuel.
-                </p>
+              <article className={`rounded-xl border p-5 ${theme.shell}`}>
+                <h4 className="text-lg font-black uppercase">{T.compare.gym}</h4>
+                <p className={`mt-3 text-sm leading-relaxed ${theme.muted}`}>{T.compare.gymText}</p>
               </article>
-
-              <article className={`rounded-2xl border p-5 ${theme.shell}`}>
-                <h4 className="text-lg font-black uppercase">Coach personnel</h4>
-                <p className={`mt-3 text-sm leading-relaxed ${theme.muted}`}>
-                  Encadrement fort, mais coût élevé et dépendance à des créneaux bloqués.
-                </p>
+              <article className={`rounded-xl border p-5 ${theme.shell}`}>
+                <h4 className="text-lg font-black uppercase">{T.compare.coach}</h4>
+                <p className={`mt-3 text-sm leading-relaxed ${theme.muted}`}>{T.compare.coachText}</p>
               </article>
-
-              <article className={`relative rounded-2xl border-2 p-5 ${theme.featured}`}>
-                <span className="absolute right-4 top-4 inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#5f7dff] text-sm font-black text-white">
-                  ✓
-                </span>
-                <h4 className="text-lg font-black uppercase">NEXGYM ONE</h4>
-                <p className={`mt-3 text-sm leading-relaxed ${theme.muted}`}>
-                  Jusqu’à 100kg de résistance, 0.5m² d’espace, accès 24/7 à domicile, 0 abonnement mensuel.
-                </p>
-                <p className="mt-4 rounded-xl border border-[#6e8dff]/45 bg-[#6e8dff]/12 px-3 py-2 text-xs font-bold uppercase tracking-[0.08em] text-[#8ea6ff]">
-                  Résumé: niveau premium + liberté totale + coût sous contrôle.
+              <article className={`relative rounded-xl border-2 p-5 ${theme.featured}`}>
+                <span className="absolute right-4 top-4 flex h-7 w-7 items-center justify-center rounded-full bg-[#5f7dff] text-sm font-bold text-white">✓</span>
+                <h4 className="text-lg font-black uppercase">{T.compare.us}</h4>
+                <p className={`mt-3 text-sm leading-relaxed ${theme.muted}`}>{T.compare.usText}</p>
+                <p className="mt-4 rounded-lg border border-[#6e8dff]/40 bg-[#6e8dff]/10 px-3 py-2 text-xs font-bold uppercase tracking-wide text-[#a4adff]">
+                  {T.compare.usSummary}
                 </p>
               </article>
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <a href="#waitlist" className={`rounded-full px-6 py-3 text-sm font-black uppercase tracking-wide ${theme.cta}`}>
-                Je veux mon accès prioritaire
+            <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+              <a href="#waitlist" className={`rounded-full px-8 py-3.5 text-sm font-black uppercase tracking-wide ${theme.cta}`}>
+                {T.compare.cta}
               </a>
-              <span className={`text-xs font-semibold uppercase tracking-[0.12em] ${theme.soft}`}>
-                Place limitée au prochain drop
-              </span>
+              <span className={`text-xs font-semibold uppercase tracking-wider ${theme.soft}`}>{T.compare.ctaHint}</span>
             </div>
-          </div>
-                  <div className="mt-8 text-center">
-            <a href="#waitlist" className={`inline-flex rounded-full px-6 py-3 text-sm font-black uppercase tracking-wide ${theme.cta}`}>JE VEUX MON ACCÈS PRIORITAIRE</a>
           </div>
         </section>
 
-        <section id="waitlist" className="mx-auto mt-16 w-[min(760px,94%)]">
-          <div className={`rounded-[2rem] border p-6 sm:p-10 ${theme.shell}`}>
-            <p className="text-center text-[11px] font-bold uppercase tracking-[0.22em] text-violet-400">Waitlist privée</p>
-            <h2 className="mt-3 text-center text-3xl font-black uppercase sm:text-5xl">Prenez votre place maintenant.</h2>
-            <p className={`mx-auto mt-3 max-w-xl text-center text-sm leading-relaxed ${theme.muted}`}>
-              Vous recevez l’info de lancement en priorité. Aucun paiement aujourd’hui, aucun spam.
-            </p>
+        {/* FAQ */}
+        <section id="faq" className="mx-auto mt-20 w-[min(720px,94%)]">
+          <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-violet-400">{T.faq.eyebrow}</p>
+          <h2 className="mt-3 text-center text-3xl font-black uppercase sm:text-4xl">{T.faq.title}</h2>
 
-            <form className="mx-auto mt-8 grid max-w-xl gap-3 sm:grid-cols-2">
+          <div className="mt-8 space-y-2">
+            {faqItems.map(([q, a], i) => (
+              <div
+                key={i}
+                className={`rounded-xl border ${theme.shell} overflow-hidden`}
+              >
+                <button
+                  type="button"
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  aria-expanded={openFaq === i}
+                  className="flex w-full items-center justify-between px-5 py-4 text-left text-sm font-bold uppercase"
+                >
+                  {q}
+                  <span className="text-lg text-white/60" aria-hidden>{openFaq === i ? '−' : '+'}</span>
+                </button>
+                {openFaq === i && (
+                  <div className={`border-t border-white/10 px-5 py-4 text-sm leading-relaxed ${theme.muted}`}>
+                    {a}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Waitlist + FOMO */}
+        <section id="waitlist" className="mx-auto mt-20 w-[min(640px,94%)]">
+          <div className={`rounded-3xl border-2 border-[#86a3ff]/30 bg-[#0d1118] p-6 sm:p-10 ${theme.shell}`}>
+            <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-violet-400">{T.waitlist.eyebrow}</p>
+            <h2 className="mt-3 text-center text-3xl font-black uppercase sm:text-4xl">{T.waitlist.title}</h2>
+            <p className={`mx-auto mt-3 max-w-md text-center text-sm ${theme.muted}`}>{T.waitlist.subtitle}</p>
+
+            {/* FOMO band */}
+            <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-center">
+              <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-center text-sm font-bold text-amber-200">
+                {T.waitlist.fomo}
+              </div>
+              <p className={`text-center text-sm font-semibold ${theme.strong}`}>
+                {SPOTS_LEFT} {T.waitlist.spots}
+              </p>
+            </div>
+
+            <form className="mx-auto mt-8 grid max-w-md gap-4" onSubmit={(e) => e.preventDefault()}>
               <input
                 type="text"
                 name="prenom"
                 required
-                placeholder="Prénom"
-                className={`w-full rounded-xl border px-4 py-3 text-sm font-medium outline-none ${theme.shellSoft}`}
+                placeholder={T.waitlist.firstname}
+                className={`w-full rounded-xl border px-4 py-3.5 text-sm transition ${theme.input}`}
               />
               <input
                 type="email"
                 name="email"
                 required
-                placeholder="Email"
-                className={`w-full rounded-xl border px-4 py-3 text-sm font-medium outline-none ${theme.shellSoft}`}
+                placeholder={T.waitlist.email}
+                className={`w-full rounded-xl border px-4 py-3.5 text-sm transition ${theme.input}`}
               />
-
-              <button type="submit" className={`rounded-full px-6 py-3 text-sm font-black uppercase tracking-wide sm:col-span-2 ${theme.cta}`}>
-                RÉSERVER MON ACCÈS VIP
+              <button type="submit" className={`rounded-full px-6 py-4 text-sm font-black uppercase tracking-wide ${theme.cta}`}>
+                {T.waitlist.cta}
               </button>
             </form>
 
-            <p className={`mt-4 text-center text-xs font-semibold uppercase tracking-[0.1em] ${theme.soft}`}>
-              Usage unique: vous prévenir avant l’ouverture publique.
-            </p>
+            <p className={`mt-4 text-center text-xs font-medium ${theme.soft}`}>{T.waitlist.hint}</p>
           </div>
         </section>
       </main>
 
-      <footer className="relative z-10 pb-10 pt-2">
-        <div className={`mx-auto flex w-[min(1120px,94%)] flex-col items-center justify-between gap-3 rounded-2xl border px-4 py-5 text-center sm:flex-row sm:text-left ${theme.shellSoft}`}>
-          <p className={`text-xs font-semibold uppercase tracking-[0.1em] ${theme.soft}`}>
-            NEXGYM ONE · Waitlist FR · lancement en préparation
-          </p>
-          <a href="#waitlist" className={`rounded-full px-5 py-2 text-xs font-black uppercase tracking-wide ${theme.cta}`}>
-            Sécuriser ma priorité
+      <footer className="relative z-10 border-t border-white/10 py-8">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 sm:flex-row">
+          <p className={`text-xs font-semibold uppercase tracking-wider ${theme.soft}`}>{T.footer.line}</p>
+          <a href="#waitlist" className={`rounded-full px-5 py-2.5 text-xs font-bold uppercase ${theme.cta}`}>
+            {T.footer.cta}
           </a>
         </div>
       </footer>
