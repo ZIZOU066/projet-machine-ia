@@ -214,11 +214,15 @@ export default function App() {
 
         <section className="mx-auto mt-14 grid w-[min(1100px,94%)] gap-4" id="lifestyle">
           <article className={`grid overflow-hidden rounded-[2rem] border md:grid-cols-[1.1fr,1fr] ${theme.shell}`}>
-            <img
-              src="/assets/nexgym/lifestyle-home-setup.jpg"
-              alt="NEXGYM ONE dans une salle lifestyle à domicile"
-              className="h-full min-h-[300px] w-full object-cover"
-            />
+            <div className="relative h-full min-h-[300px] w-full">
+              <img
+                src="/assets/nexgym/lifestyle-home-setup.jpg"
+                alt="NEXGYM ONE dans une salle lifestyle à domicile"
+                className="h-full min-h-[300px] w-full object-cover"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/45 via-black/15 to-transparent backdrop-blur-[1px]" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent" />
+            </div>
             <div className="p-6 sm:p-8">
               <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-rose-400">Lifestyle / home setup</p>
               <h2 className="mt-3 text-3xl font-black uppercase sm:text-5xl">Zéro trajet. Zéro friction.</h2>
