@@ -1,48 +1,60 @@
-# AEKE Waitlist FR — Landing Premium (France)
+# Projet Machine IA — Waitlist France (Brand Shock Edition)
 
-Landing statique (HTML/CSS/JS) orientée **waitlist uniquement** pour le lancement France de la machine de sport IA.
+Landing page statique premium/mobile-first orientée **conversion waitlist uniquement**.
 
 ## Objectif
-- Positionnement premium, moderne, mobile-first
-- Focus produit: machine de sport IA
-- CTA principal: **rejoindre la liste d’attente**
-- Zone de lancement: **Antibes / France**
+Créer un impact visuel immédiat (3 secondes) pour un lancement France d’un AI Home Gym, sans vente directe, avec storytelling clair:
 
-## Stack
-- `index.html` unique (styles + script intégrés)
-- Aucun framework, aucun build step
+- Problème → Solution → Preuve → Waitlist
+- Positionnement haut de gamme/émotionnel
+- Branding neutre (pas de mention explicite de marque)
 
-## Lancer en local
-Option la plus simple:
+## Ce qui a été refait
+
+- `index.html` entièrement refondu (design cinématique + glassmorphism maîtrisé)
+- Hero fullscreen avec fond vidéo + overlay premium
+- Direction artistique forte (néons pink/violet/cyan, typo Sora + Inter)
+- Sections conversion ajoutées:
+  - Pourquoi maintenant
+  - Lancement France
+  - FAQ courte conversion
+- Features produit réelles intégrées:
+  - coaching IA
+  - correction de forme
+  - résistance digitale
+  - format compact
+  - multi-profils
+  - sans abonnement
+- Micro-interactions légères:
+  - reveal au scroll
+  - parallax léger sur hero
+  - hover cards
+
+## Media
+
+Section média en mode léger:
+
+- Miniatures YouTube (`loading="lazy"`)
+- Liens play externes (pas d’embed lourd par défaut)
+
+## Fichiers
+
+- `index.html` — landing complète
+- `assets/hero-poster.svg` — fallback visuel hero
+- `assets/README.md` — notes de remplacement assets
+
+## Développement local
 
 ```bash
-cd /home/ubuntu/.openclaw/workspace/aeke-waitlist-fr
+# dans ce dossier
 python3 -m http.server 8080
+# puis ouvrir http://localhost:8080
 ```
 
-Puis ouvrir: `http://localhost:8080`
+## Déploiement Vercel
 
-## Édition rapide
-- Tout est dans `index.html`
-- Sections incluses: Hero, bénéfices, comment ça marche, preuves, pour qui, FAQ, waitlist
-- Variante CTA A/B prête via query param:
-  - Variante A (défaut): `Rejoindre la liste d’attente`
-  - Variante B: `Demander un accès anticipé`
-  - Tester B avec: `?cta=b`
+```bash
+vercel --prod
+```
 
-## Intégration formulaire (next step)
-Le formulaire est volontairement en mode démo (`type="button"`).
-Pour production:
-1. connecter Formspree / Airtable / HubSpot
-2. ajouter event submit JS
-3. ajouter message succès/erreur
-
-## NOTE DEV (assets)
-Pour la preview, cette version utilise des visuels distants `aeke.com` en placeholder (hero image), conformément à la demande.
-Avant une mise en prod finale marque blanche, remplacer par assets autorisés/propres au projet.
-
-## Checklist qualité
-- ✅ Aucune référence legacy hors scope produit
-- ✅ Waitlist only (pas de vente directe)
-- ✅ UX responsive mobile + desktop
-- ✅ Micro-animations CSS légères
+> Si le projet est déjà lié, Vercel redéploie directement en production.
