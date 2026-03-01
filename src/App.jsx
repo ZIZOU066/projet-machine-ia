@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react'
 
 const menuItems = [
-  ['Produit', '#impact'],
-  ['Usage', '#lifestyle'],
-  ['Résultats', '#performance'],
+  ['Impact', '#impact'],
+  ['Lifestyle', '#lifestyle'],
+  ['Performance', '#performance'],
   ['Comparatif', '#comparatif'],
 ]
 
@@ -167,22 +167,22 @@ export default function App() {
       <main id="top" className="relative z-10 pb-20 pt-28 sm:pt-32">
         <section className="mx-auto w-[min(1100px,94%)] text-center" id="impact">
           <p className="inline-flex rounded-full border border-fuchsia-400/40 bg-fuchsia-400/10 px-4 py-1 text-[11px] font-bold uppercase tracking-[0.22em] text-fuchsia-300">
-            Accès prioritaire · Série limitée
+            Waitlist privée · Première série bientôt complète
           </p>
           <h1 className="mx-auto mt-6 max-w-5xl text-4xl font-black uppercase leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
-            La machine de sport intelligente qui élève vos performances à domicile.
+            NEXGYM ONE, la machine premium qui remplace la salle à domicile.
           </h1>
           <p className={`mx-auto mt-5 max-w-3xl text-sm font-semibold sm:text-lg ${theme.muted}`}>
-            100kg de résistance numérique, coaching IA en temps réel, et une expérience premium conçue pour progresser vite.
+            Entraînez-vous quand vous voulez, avec un guidage intelligent, sans trajet et sans compromis sur les résultats.
           </p>
 
           <p className="mx-auto mt-6 inline-flex max-w-2xl items-center justify-center rounded-2xl border border-rose-400/50 bg-rose-500/10 px-5 py-3 text-xs font-black uppercase tracking-[0.12em] text-rose-300 sm:text-sm">
-            Victime de son succès · Retour bientôt · Inscription prioritaire
+            Rupture en cours · Prochain retour stock réservé aux inscrits waitlist
           </p>
 
           <div className="mt-8 flex items-center justify-center gap-3">
             <a href="#waitlist" className={`rounded-full px-8 py-3 text-sm font-black uppercase tracking-wide sm:text-base ${theme.cta}`}>
-              Rejoindre la liste d'attente
+              Rejoindre la waitlist maintenant
             </a>
           </div>
 
