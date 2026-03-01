@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projet Machine IA — Liste d’attente France</title>
+  <style>
+    :root{--bg:#060b18;--bg2:#0f1d40;--txt:#f4f7ff;--muted:#b8c4e8;--card:#121c37;--line:#2f4ea2;--acc:#6aa8ff}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,Arial;color:var(--txt);background:linear-gradient(180deg,var(--bg),var(--bg2))}
+    .wrap{max-width:1100px;margin:0 auto;padding:24px}
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center;padding:30px 0}
+    @media(max-width:900px){.hero{grid-template-columns:1fr}}
+    h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.08;margin:0 0 12px}
+    h2{font-size:clamp(1.2rem,3vw,1.8rem);margin:0 0 10px}
+    p{color:var(--muted);line-height:1.6;margin:0 0 10px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+    .btn{display:inline-block;padding:12px 18px;border-radius:12px;background:var(--acc);color:#04112d;font-weight:800;text-decoration:none;border:none;cursor:pointer}
+    .btn.secondary{background:transparent;color:#d9e6ff;border:1px solid #3a5fb6}
+    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:16px 0}
+    .heroimg{width:100%;border-radius:14px;border:1px solid #2f4ea2;aspect-ratio:4/5;object-fit:cover;background:#0e1730}
+    .section{padding:26px 0;border-top:1px solid #1f2e5b}
+    form{display:grid;gap:10px;max-width:580px}
+    input,select{background:#0f1934;color:#e8efff;border:1px solid #3558b0;border-radius:10px;padding:12px}
+    .small{font-size:.86rem;color:#8ea6de}
+    .pill{display:inline-block;font-size:.82rem;padding:5px 8px;border-radius:999px;border:1px solid #3558b0;color:#b9ceff;margin-right:6px}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div>
+      <span class="pill">Projet Machine IA</span><span class="pill">France — Liste d’attente</span>
+      <h1>Le home gym intelligent arrive en France.</h1>
+      <p>On ouvre une liste d’attente pour les personnes qui veulent tester la machine en avant-première et recevoir les infos de lancement.</p>
+      <div class="row">
+        <a href="#waitlist" class="btn">Rejoindre la liste d’attente</a>
+        <a href="#faq" class="btn secondary">Voir la FAQ</a>
+      </div>
+      <p class="small">Version développement (visuels de référence temporaires).</p>
+    </div>
+    <img class="heroimg" src="https://aeke.com/cdn/shop/files/AEKE_Smart_Home_Gym_K1_16_grande.jpg" alt="Machine IA"/>
+  </section>
+
+  <section class="section">
+    <h2>Pourquoi ce produit intéresse ?</h2>
+    <div class="grid">
+      <div class="card"><b>Coaching intelligent</b><p>Accompagnement en temps réel pour mieux s’entraîner.</p></div>
+      <div class="card"><b>Format compact</b><p>Pensé pour la maison, sans transformer ton salon en salle.</p></div>
+      <div class="card"><b>Suivi progression</b><p>Tu visualises tes progrès sans te prendre la tête.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Pour qui ?</h2>
+    <div class="grid">
+      <div class="card"><b>Particuliers</b><p>Tu veux un entraînement efficace à la maison.</p></div>
+      <div class="card"><b>Résidences / Hôtels</b><p>Offrir une expérience fitness premium moderne.</p></div>
+      <div class="card"><b>Coachs / Studios</b><p>Ajouter un outil intelligent à ton offre.</p></div>
+    </div>
+  </section>
+
+  <section id="waitlist" class="section">
+    <h2>Rejoindre la liste d’attente France</h2>
+    <p>Laisse tes infos. On te contacte en priorité pour les créneaux démo et les infos de lancement.</p>
+    <form>
+      <input type="text" placeholder="Prénom et nom" required>
+      <input type="email" placeholder="Email" required>
+      <input type="tel" placeholder="Téléphone / WhatsApp (optionnel)">
+      <select>
+        <option>Particulier</option>
+        <option>Entreprise / Résidence / Hôtel</option>
+        <option>Coach / Studio</option>
+      </select>
+      <button type="button" class="btn">Je rejoins la waitlist</button>
+    </form>
+    <p class="small">Formulaire non connecté (à brancher sur Airtable/Notion/Formspree/HubSpot).</p>
+  </section>
+
+  <section id="faq" class="section">
+    <h2>FAQ rapide</h2>
+    <div class="grid">
+      <div class="card"><b>Est-ce une vente directe ?</b><p>Non, pour l’instant c’est une phase de validation via waitlist.</p></div>
+      <div class="card"><b>Quand les démos commencent ?</b><p>Dès qu’on a suffisamment d’inscriptions qualifiées en France.</p></div>
+      <div class="card"><b>Puis-je être partenaire ?</b><p>Oui, laisse tes infos dans la waitlist et précise ton profil.</p></div>
+    </div>
+  </section>
+</div>
+</body>
+</html>
