@@ -277,37 +277,27 @@ export default function App() {
 
         <section id="comparatif" className="mx-auto mt-16 w-[min(1100px,94%)]">
           <div className={`rounded-[2rem] border p-6 sm:p-8 ${theme.shellSoft}`}>
-            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-violet-400">Comparatif express</p>
-            <h3 className="mt-3 text-3xl font-black uppercase sm:text-4xl">Le premium se voit en 3 métriques.</h3>
-            <p className={`mt-3 text-xs font-semibold uppercase tracking-[0.1em] sm:text-sm ${theme.muted}`}>
-              Plus la barre est haute, plus l'option est avantageuse pour votre quotidien.
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-violet-400">Comparatif</p>
+            <h3 className="mt-3 text-3xl font-black uppercase sm:text-4xl">Pourquoi NEXGYM ONE fait la différence</h3>
+            <p className={`mt-3 text-sm leading-relaxed ${theme.muted}`}>
+              Une expérience premium à domicile, sans contraintes de planning ni abonnement mensuel.
             </p>
 
             <div className="mt-8 grid gap-4 md:grid-cols-3">
-              {comparisonCards.map((option) => (
-                <article
-                  key={option.title}
-                  className={`rounded-2xl border p-5 transition ${theme.shell} ${option.featured ? theme.featured : ''}`}
-                >
-                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-cyan-400">{option.subtitle}</p>
-                  <h4 className="mt-2 text-xl font-black uppercase">{option.title}</h4>
+              <article className={`rounded-2xl border p-5 ${theme.shell}`}>
+                <h4 className="text-lg font-black uppercase">Salle de sport</h4>
+                <p className={`mt-3 text-sm leading-relaxed ${theme.muted}`}>Abonnements mensuels, trajets récurrents, matériel parfois occupé.</p>
+              </article>
 
-                  <div className="mt-5 space-y-4">
-                    {option.metrics.map((metric) => (
-                      <div key={metric.label}>
-                        <div className="mb-1 flex items-center justify-between gap-3 text-[11px] font-bold uppercase tracking-[0.12em]">
-                          <span className={theme.muted}>{metric.label}</span>
-                          <span>{metric.value}%</span>
-                        </div>
-                        <div className={`h-2.5 w-full overflow-hidden rounded-full ${theme.barTrack}`}>
-                          <div className={`h-full rounded-full ${theme.barFill}`} style={{ width: `${metric.value}%` }} />
-                        </div>
-                        <p className={`mt-1 text-[10px] font-semibold uppercase tracking-[0.08em] ${theme.soft}`}>{metric.hint}</p>
-                      </div>
-                    ))}
-                  </div>
-                </article>
-              ))}
+              <article className={`rounded-2xl border p-5 ${theme.shell}`}>
+                <h4 className="text-lg font-black uppercase">Coach personnel</h4>
+                <p className={`mt-3 text-sm leading-relaxed ${theme.muted}`}>Très personnalisé, mais cher et dépendant d’un planning fixe.</p>
+              </article>
+
+              <article className={`rounded-2xl border-2 p-5 ${theme.shell} ${theme.featured}`}>
+                <h4 className="text-lg font-black uppercase">NEXGYM ONE</h4>
+                <p className={`mt-3 text-sm leading-relaxed ${theme.muted}`}>Achat unique, disponible 24/7 chez vous, suivi intelligent ultra-personnalisé.</p>
+              </article>
             </div>
           </div>
         </section>
