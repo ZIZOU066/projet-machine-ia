@@ -1,277 +1,365 @@
-import { useEffect, useState } from 'react'
+import { useMemo, useState } from 'react'
 
-const benefices = [
+const images = Array.from({ length: 10 }, (_, i) => `/assets/nexgym-${String(i + 1).padStart(2, '0')}.jpg`)
+
+const pourquoiItems = [
   {
-    titre: 'Coach IA qui corrige chaque répétition',
-    texte:
-      'La machine analyse votre posture en temps réel, ajuste la résistance et vous guide à la voix pour progresser plus vite, sans vous blesser.',
+    title: 'Coaching IA en temps réel',
+    text: 'NEXGYM ONE analyse chaque mouvement, corrige la posture et adapte automatiquement la résistance pour maximiser les résultats.',
   },
   {
-    titre: 'Programme intelligent, même quand vous manquez de temps',
-    texte:
-      'Séances de 20 à 45 minutes optimisées selon votre objectif: perte de gras, tonification ou performance.',
+    title: 'Résultats sans perte de temps',
+    text: 'Des séances courtes et ultra efficaces conçues pour les agendas chargés. Vous progressez même avec 25 minutes par jour.',
   },
   {
-    titre: 'Un équipement premium, compact et silencieux',
-    texte:
-      'Design salon-compatible, matériaux haut de gamme, stabilité maximale et capteurs précis pour un usage quotidien.',
+    title: 'Design premium, compact, silencieux',
+    text: 'Une machine élégante pensée pour la maison: qualité studio, finition haut de gamme, encombrement minimal.',
   },
 ]
 
-const etapes = [
-  {
-    titre: '1. Vous définissez votre objectif',
-    texte: 'Niveau, temps disponible, zone à travailler: la machine crée un plan sur mesure dès la première session.',
-  },
-  {
-    titre: '2. L’IA pilote votre entraînement',
-    texte: 'Résistance adaptative, corrections instantanées et rythme personnalisé pendant toute la séance.',
-  },
-  {
-    titre: '3. Vous suivez des résultats concrets',
-    texte: 'Progression visible semaine après semaine avec indicateurs simples, clairs et motivants.',
-  },
-]
-
-const raisons = [
-  {
-    titre: 'Priorité sur la prochaine vague de stock',
-    texte: 'Les inscrits passent avant l’ouverture publique lors du retour en disponibilité.',
-  },
-  {
-    titre: 'Infos de retour en temps réel',
-    texte: 'Vous recevez en avant-première les dates de réassort et les créneaux de livraison.',
-  },
-  {
-    titre: 'Accès aux démonstrations privées',
-    texte: 'Invitations à des démos exclusives pour voir la machine en action avant tout le monde.',
-  },
+const features = [
+  'Résistance intelligente pilotée par IA',
+  'Bibliothèque de sessions guidées multi-objectifs',
+  'Suivi précis de la progression et des performances',
+  'Interface intuitive et expérience immersive',
+  'Mises à jour logicielles continues',
+  'Accompagnement premium après livraison',
 ]
 
 const faqs = [
   {
-    q: 'Quel sera le prix final de la machine ?',
-    r: 'Le tarif final sera communiqué avant la réouverture des ventes. L’inscription n’engage à aucun paiement et vous laisse totalement libre.',
+    q: 'Quand NEXGYM ONE sera-t-il à nouveau disponible ?',
+    a: 'Le prochain réassort est en préparation. Les inscrits à la liste d’attente seront prévenus avant l’annonce publique.',
   },
   {
-    q: 'Quand la machine sera-t-elle de retour ?',
-    r: 'La production est en cours de relance. Les inscrits à la liste d’attente recevront les dates exactes avant l’annonce publique.',
+    q: 'L’inscription implique-t-elle un paiement ?',
+    a: 'Non. Aucun paiement, aucun engagement. Vous réservez simplement votre priorité d’accès au retour en stock.',
   },
   {
-    q: 'Puis-je faire confiance à la qualité du produit ?',
-    r: 'Oui. La machine est conçue pour un usage intensif à domicile, avec composants premium, suivi logiciel continu et support dédié.',
+    q: 'Est-ce adapté aux débutants ?',
+    a: 'Oui. L’IA ajuste niveau, intensité et progression selon votre profil, que vous débutiez ou que vous soyez déjà sportif.',
+  },
+  {
+    q: 'Puis-je l’utiliser dans un appartement ?',
+    a: 'Oui. NEXGYM ONE est conçue pour être compacte et silencieuse, idéale pour une utilisation domestique premium.',
   },
 ]
 
-function SectionTitle({ badge, titre, sousTitre }) {
+const compareRows = [
+  {
+    label: 'Personnalisation en temps réel',
+    gym: 'Limitée',
+    coach: 'Excellente',
+    nexgym: 'IA adaptative 24/7',
+  },
+  {
+    label: 'Coût mensuel',
+    gym: '€€',
+    coach: '€€€€',
+    nexgym: 'Rentable sur la durée',
+  },
+  {
+    label: 'Disponibilité',
+    gym: 'Horaires fixes',
+    coach: 'Sur rendez-vous',
+    nexgym: 'À domicile, quand vous voulez',
+  },
+  {
+    label: 'Qualité du suivi',
+    gym: 'Autonome',
+    coach: 'Très élevée',
+    nexgym: 'Analyse continue + data',
+  },
+]
+
+function SectionTitle({ kicker, title, subtitle }) {
   return (
     <div className="mx-auto max-w-3xl text-center">
-      <p className="mb-4 inline-flex rounded-full border border-white/15 bg-white/5 px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-indigo-300">
-        {badge}
-      </p>
-      <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">{titre}</h2>
-      <p className="mt-4 text-base text-zinc-300 sm:text-lg">{sousTitre}</p>
+      <span className="inline-flex rounded-full border border-current/20 px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] opacity-80">
+        {kicker}
+      </span>
+      <h2 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h2>
+      <p className="mx-auto mt-4 max-w-2xl text-sm/7 opacity-80 sm:text-base">{subtitle}</p>
     </div>
-  )
-}
-
-function Card({ titre, texte }) {
-  return (
-    <article className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:border-indigo-300/40 hover:bg-white/[0.06]">
-      <h3 className="text-lg font-semibold text-white">{titre}</h3>
-      <p className="mt-3 text-sm leading-relaxed text-zinc-300">{texte}</p>
-    </article>
   )
 }
 
 export default function App() {
   const [isDark, setIsDark] = useState(true)
+  const [menuOpen, setMenuOpen] = useState(false)
 
-  useEffect(() => {
-    document.documentElement.classList.toggle('dark', isDark)
-  }, [isDark])
+  const theme = useMemo(
+    () =>
+      isDark
+        ? {
+            root: 'bg-[#07090f] text-white',
+            surface: 'border-white/10 bg-white/[0.03]',
+            pill: 'border-white/15 bg-black/50',
+            muted: 'text-white/70',
+            soft: 'text-white/55',
+            cta: 'bg-white text-black hover:bg-white/90',
+            ctaGhost: 'border-white/20 hover:border-white/40',
+            bgFx:
+              'bg-[radial-gradient(circle_at_8%_10%,rgba(90,108,255,0.32),transparent_33%),radial-gradient(circle_at_85%_10%,rgba(44,196,255,0.15),transparent_34%),radial-gradient(circle_at_50%_85%,rgba(99,102,241,0.15),transparent_45%)]',
+          }
+        : {
+            root: 'bg-[#f3f6fb] text-[#0f172a]',
+            surface: 'border-black/10 bg-white/90',
+            pill: 'border-black/15 bg-white/80',
+            muted: 'text-slate-700',
+            soft: 'text-slate-500',
+            cta: 'bg-[#0f172a] text-white hover:bg-black',
+            ctaGhost: 'border-black/20 hover:border-black/40',
+            bgFx:
+              'bg-[radial-gradient(circle_at_8%_10%,rgba(79,70,229,0.2),transparent_33%),radial-gradient(circle_at_85%_10%,rgba(14,165,233,0.14),transparent_34%),radial-gradient(circle_at_50%_85%,rgba(99,102,241,0.1),transparent_45%)]',
+          },
+    [isDark],
+  )
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 selection:bg-indigo-500/30 selection:text-white">
-      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_10%_5%,rgba(99,102,241,0.18),transparent_35%),radial-gradient(circle_at_90%_15%,rgba(14,116,144,0.15),transparent_40%)]" />
+    <div className={`min-h-screen ${theme.root} transition-colors duration-300`}>
+      <div className={`pointer-events-none fixed inset-0 ${theme.bgFx}`} />
 
-      <header className="sticky top-5 z-40 mx-auto w-[min(1100px,92%)]">
-        <div className="flex items-center justify-between rounded-full border border-white/15 bg-zinc-900/70 px-4 py-3 shadow-2xl shadow-black/30 backdrop-blur-2xl sm:px-6">
-          <a href="#top" className="text-sm font-semibold tracking-wide text-white sm:text-base">
-            Aeke Motion IA
-          </a>
-          <div className="flex items-center gap-2 sm:gap-3">
-            <a href="#waitlist" className="hidden rounded-full border border-white/20 px-4 py-2 text-sm font-medium text-zinc-200 transition hover:border-white/40 hover:text-white sm:inline-flex">
-              Rejoindre la liste d’attente
+      <header className="sticky top-4 z-50 mx-auto w-[min(1120px,94%)]">
+        <div className={`rounded-full border px-3 py-2 backdrop-blur-2xl sm:px-5 ${theme.pill}`}>
+          <div className="flex items-center justify-between">
+            <a href="#top" className="text-sm font-semibold tracking-[0.14em] sm:text-base">
+              NEXGYM
             </a>
-            <button
-              type="button"
-              onClick={() => setIsDark((v) => !v)}
-              className="rounded-full border border-white/20 bg-white/5 px-3 py-2 text-xs font-semibold text-zinc-100 transition hover:bg-white/10 sm:px-4 sm:text-sm"
-              aria-label="Basculer le thème Dark ou Light"
-            >
-              Dark / Light
-            </button>
+
+            <nav className="hidden items-center gap-2 md:flex">
+              {[
+                ['Pourquoi', '#pourquoi'],
+                ['Comparatif', '#comparatif'],
+                ['Fonctionnalités', '#features'],
+                ['FAQ', '#faq'],
+              ].map(([label, href]) => (
+                <a key={label} href={href} className={`rounded-full border px-4 py-2 text-xs font-medium ${theme.ctaGhost}`}>
+                  {label}
+                </a>
+              ))}
+              <button
+                type="button"
+                onClick={() => setIsDark((v) => !v)}
+                className={`rounded-full border px-4 py-2 text-xs font-semibold ${theme.ctaGhost}`}
+              >
+                {isDark ? 'Light' : 'Dark'}
+              </button>
+              <a href="#waitlist" className={`rounded-full px-4 py-2 text-xs font-semibold ${theme.cta}`}>
+                Rejoindre la liste d’attente
+              </a>
+            </nav>
+
+            <div className="flex items-center gap-2 md:hidden">
+              <button
+                type="button"
+                onClick={() => setIsDark((v) => !v)}
+                className={`rounded-full border px-3 py-2 text-xs font-semibold ${theme.ctaGhost}`}
+              >
+                {isDark ? 'Light' : 'Dark'}
+              </button>
+              <button
+                type="button"
+                onClick={() => setMenuOpen((v) => !v)}
+                className={`grid h-9 w-9 place-items-center rounded-full border ${theme.ctaGhost}`}
+                aria-label="Ouvrir le menu"
+              >
+                <span className="text-lg leading-none">≡</span>
+              </button>
+            </div>
           </div>
+
+          {menuOpen && (
+            <div className="mt-3 grid gap-2 md:hidden">
+              {[
+                ['Pourquoi NEXGYM ONE', '#pourquoi'],
+                ['Comparatif', '#comparatif'],
+                ['Fonctionnalités clés', '#features'],
+                ['FAQ', '#faq'],
+                ['Rejoindre la liste d’attente', '#waitlist'],
+              ].map(([label, href]) => (
+                <a
+                  key={label}
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className={`rounded-2xl border px-4 py-3 text-sm ${theme.surface}`}
+                >
+                  {label}
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </header>
 
       <main id="top" className="relative z-10 pb-20">
-        <section className="mx-auto grid w-[min(1100px,92%)] gap-10 pt-16 sm:pt-20 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
+        <section className="mx-auto grid w-[min(1120px,94%)] gap-10 pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
-            <p className="inline-flex rounded-full border border-amber-300/30 bg-amber-200/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-amber-200">
-              Rupture de stock • Victime de son succès
+            <p className="inline-flex rounded-full border border-amber-400/30 bg-amber-400/10 px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-200">
+              Rupture de stock · Victime de son succès
             </p>
-            <h1 className="mt-6 text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-              La machine de sport avec IA intégrée qui remplace un coach à domicile.
+            <h1 className="mt-6 text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
+              NEXGYM ONE.
+              <br />
+              Votre salle IA premium, à la maison.
             </h1>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-zinc-300 sm:text-lg">
-              Aeke Motion IA combine résistance intelligente, analyse de mouvement et coaching en direct pour des séances ultra efficaces. Notre dernière série est épuisée. Le prochain retour arrive bientôt: inscrivez-vous pour être prioritaire.
+            <p className={`mt-6 max-w-2xl text-base leading-relaxed sm:text-lg ${theme.muted}`}>
+              L’expérience fitness nouvelle génération : coaching intelligent, résistance adaptative et résultats mesurables.
+              Notre prochain stock revient bientôt. Inscrivez-vous maintenant pour passer en priorité.
             </p>
+
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <a
-                href="#waitlist"
-                className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-zinc-900 transition hover:scale-[1.01] hover:bg-zinc-100 sm:text-base"
-              >
+              <a href="#waitlist" className={`rounded-full px-6 py-3 text-sm font-semibold sm:text-base ${theme.cta}`}>
                 Rejoindre la liste d’attente
               </a>
-              <p className="text-sm text-zinc-400">Aucun paiement. Aucune précommande. Juste un accès prioritaire.</p>
+              <span className={`text-xs sm:text-sm ${theme.soft}`}>Aucun paiement · Aucun engagement · Accès prioritaire</span>
             </div>
           </div>
 
-          <div className="rounded-[2rem] border border-white/15 bg-gradient-to-br from-white/10 via-white/[0.04] to-transparent p-6 shadow-2xl shadow-black/30">
-            <div className="aspect-[4/5] rounded-[1.6rem] border border-white/10 bg-[radial-gradient(circle_at_40%_20%,rgba(129,140,248,0.35),transparent_48%),linear-gradient(150deg,#18181b_5%,#0f172a_45%,#111827_100%)] p-6">
-              <div className="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-black/20 p-5">
-                <div>
-                  <p className="text-xs font-medium uppercase tracking-[0.2em] text-zinc-300">Console IA embarquée</p>
-                  <p className="mt-2 text-sm text-zinc-200">Correction posturale instantanée • Résistance adaptative • Progression pilotée</p>
-                </div>
-                <div className="rounded-xl border border-emerald-300/25 bg-emerald-400/10 p-3">
-                  <p className="text-xs uppercase tracking-[0.16em] text-emerald-200">Retour bientôt</p>
-                  <p className="mt-1 text-sm font-medium text-white">Inscription prioritaire ouverte</p>
-                </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <img src={images[0]} alt="NEXGYM ONE vue principale" className="h-64 w-full rounded-3xl object-cover sm:h-80" />
+            <img src={images[1]} alt="Détail design NEXGYM" className="h-64 w-full rounded-3xl object-cover sm:mt-8 sm:h-80" />
+            <img src={images[2]} alt="Session d’entraînement intelligente" className="h-64 w-full rounded-3xl object-cover sm:h-80" />
+            <img src={images[3]} alt="Interface premium NEXGYM ONE" className="h-64 w-full rounded-3xl object-cover sm:mt-8 sm:h-80" />
+          </div>
+        </section>
+
+        <section id="pourquoi" className="mx-auto mt-24 w-[min(1120px,94%)]">
+          <SectionTitle
+            kicker="Pourquoi NEXGYM ONE"
+            title="Plus qu’une machine: un vrai partenaire de progression"
+            subtitle="Conçue pour celles et ceux qui veulent un standard premium, sans compromis entre performance, confort et design."
+          />
+
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {pourquoiItems.map((item) => (
+              <article key={item.title} className={`rounded-3xl border p-6 ${theme.surface}`}>
+                <h3 className="text-lg font-semibold">{item.title}</h3>
+                <p className={`mt-3 text-sm leading-relaxed ${theme.muted}`}>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="comparatif" className="mx-auto mt-24 w-[min(1120px,94%)]">
+          <SectionTitle
+            kicker="Comparatif"
+            title="Salle classique, coach perso, ou NEXGYM ONE ?"
+            subtitle="Quand on compare objectivement, NEXGYM ONE combine flexibilité, personnalisation et rentabilité long terme."
+          />
+
+          <div className={`mt-10 overflow-hidden rounded-3xl border ${theme.surface}`}>
+            <div className="grid grid-cols-4 border-b border-current/10 p-4 text-[11px] font-semibold uppercase tracking-[0.15em] sm:text-xs">
+              <div>Critères</div>
+              <div>Salle de sport</div>
+              <div>Coach perso</div>
+              <div>NEXGYM ONE</div>
+            </div>
+            {compareRows.map((row) => (
+              <div key={row.label} className={`grid grid-cols-4 p-4 text-xs sm:text-sm ${theme.muted}`}>
+                <div className="font-semibold">{row.label}</div>
+                <div>{row.gym}</div>
+                <div>{row.coach}</div>
+                <div className="font-semibold">{row.nexgym}</div>
               </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="mx-auto mt-24 w-[min(1100px,92%)]">
-          <SectionTitle
-            badge="Pourquoi ce produit"
-            titre="Trois bénéfices qui changent réellement vos entraînements"
-            sousTitre="Une expérience premium pensée pour obtenir plus de résultats en moins de temps."
-          />
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {benefices.map((item) => (
-              <Card key={item.titre} {...item} />
             ))}
           </div>
         </section>
 
-        <section className="mx-auto mt-24 w-[min(1100px,92%)]">
-          <SectionTitle
-            badge="Comment ça fonctionne"
-            titre="Simple, guidé, précis"
-            sousTitre="Trois étapes claires pour transformer chaque séance en progrès mesurable."
-          />
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {etapes.map((item) => (
-              <Card key={item.titre} {...item} />
+        <section id="features" className="mx-auto mt-24 grid w-[min(1120px,94%)] gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
+          <div>
+            <SectionTitle
+              kicker="Fonctionnalités clés"
+              title="Chaque détail pensé pour une expérience premium"
+              subtitle="Du hardware à l’IA, tout est conçu pour vous offrir une sensation de coaching haut niveau, chez vous."
+            />
+            <ul className="mt-8 grid gap-3">
+              {features.map((feature) => (
+                <li key={feature} className={`rounded-2xl border px-4 py-3 text-sm ${theme.surface}`}>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            {images.slice(4, 10).map((img, idx) => (
+              <img
+                key={img}
+                src={img}
+                alt={`Visuel NEXGYM ONE ${idx + 5}`}
+                className={`h-40 w-full rounded-2xl object-cover sm:h-52 ${idx % 2 === 1 ? 'sm:translate-y-8' : ''}`}
+              />
             ))}
           </div>
         </section>
 
-        <section className="mx-auto mt-24 w-[min(1100px,92%)]">
+        <section id="faq" className="mx-auto mt-24 w-[min(900px,94%)]">
           <SectionTitle
-            badge="Pourquoi s’inscrire maintenant"
-            titre="Ne manquez pas le prochain retour"
-            sousTitre="Votre inscription vous place dans la file prioritaire avant la prochaine ouverture publique."
+            kicker="FAQ"
+            title="Des réponses claires, avant votre inscription"
+            subtitle="Transparence totale: vous gardez le contrôle et vous décidez au moment du retour en stock."
           />
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {raisons.map((item) => (
-              <Card key={item.titre} {...item} />
-            ))}
-          </div>
-        </section>
 
-        <section className="mx-auto mt-24 w-[min(900px,92%)]">
-          <SectionTitle
-            badge="FAQ"
-            titre="Réponses aux questions clés"
-            sousTitre="Transparence totale avant votre inscription à la liste d’attente."
-          />
           <div className="mt-10 space-y-4">
             {faqs.map((item) => (
-              <details
-                key={item.q}
-                className="group rounded-2xl border border-white/10 bg-white/[0.03] p-5 open:border-indigo-300/45 open:bg-white/[0.06]"
-              >
-                <summary className="cursor-pointer list-none text-base font-medium text-white marker:hidden">{item.q}</summary>
-                <p className="mt-3 text-sm leading-relaxed text-zinc-300">{item.r}</p>
+              <details key={item.q} className={`group rounded-2xl border p-5 ${theme.surface}`}>
+                <summary className="cursor-pointer list-none text-sm font-semibold sm:text-base">{item.q}</summary>
+                <p className={`mt-3 text-sm leading-relaxed ${theme.muted}`}>{item.a}</p>
               </details>
             ))}
           </div>
         </section>
 
-        <section id="waitlist" className="mx-auto mt-24 w-[min(760px,92%)]">
-          <div className="rounded-[2rem] border border-white/15 bg-zinc-900/70 p-6 shadow-2xl shadow-black/30 backdrop-blur-xl sm:p-10">
+        <section id="waitlist" className="mx-auto mt-24 w-[min(760px,94%)]">
+          <div className={`rounded-[2rem] border p-6 sm:p-10 ${theme.surface}`}>
             <SectionTitle
-              badge="Liste d’attente prioritaire"
-              titre="Réservez votre accès au prochain stock"
-              sousTitre="Complétez ce formulaire pour recevoir en priorité les informations de disponibilité."
+              kicker="Liste d’attente prioritaire"
+              title="Soyez parmi les premiers informés du retour"
+              subtitle="Remplissez ce formulaire. Vous recevrez en avant-première l’accès au prochain stock NEXGYM ONE."
             />
 
             <form className="mt-10 grid gap-4 sm:grid-cols-2">
-              <label className="text-sm text-zinc-200">
-                Nom
-                <input
-                  type="text"
-                  name="nom"
-                  required
-                  className="mt-2 w-full rounded-xl border border-white/15 bg-black/25 px-4 py-3 text-white placeholder:text-zinc-500 focus:border-indigo-300/60 focus:outline-none"
-                  placeholder="Votre nom"
-                />
-              </label>
-              <label className="text-sm text-zinc-200">
-                Prénom
-                <input
-                  type="text"
-                  name="prenom"
-                  required
-                  className="mt-2 w-full rounded-xl border border-white/15 bg-black/25 px-4 py-3 text-white placeholder:text-zinc-500 focus:border-indigo-300/60 focus:outline-none"
-                  placeholder="Votre prénom"
-                />
-              </label>
-              <label className="text-sm text-zinc-200 sm:col-span-2">
+              {[['Nom', 'nom', 'Votre nom'], ['Prénom', 'prenom', 'Votre prénom']].map(([label, name, placeholder]) => (
+                <label key={name} className="text-sm font-medium">
+                  {label}
+                  <input
+                    type="text"
+                    name={name}
+                    required
+                    placeholder={placeholder}
+                    className={`mt-2 w-full rounded-xl border px-4 py-3 text-sm outline-none ${theme.surface}`}
+                  />
+                </label>
+              ))}
+
+              <label className="text-sm font-medium sm:col-span-2">
                 Email
                 <input
                   type="email"
                   name="email"
                   required
-                  className="mt-2 w-full rounded-xl border border-white/15 bg-black/25 px-4 py-3 text-white placeholder:text-zinc-500 focus:border-indigo-300/60 focus:outline-none"
                   placeholder="vous@email.com"
+                  className={`mt-2 w-full rounded-xl border px-4 py-3 text-sm outline-none ${theme.surface}`}
                 />
               </label>
-              <label className="text-sm text-zinc-200 sm:col-span-2">
+
+              <label className="text-sm font-medium sm:col-span-2">
                 Téléphone
                 <input
                   type="tel"
                   name="telephone"
                   required
-                  className="mt-2 w-full rounded-xl border border-white/15 bg-black/25 px-4 py-3 text-white placeholder:text-zinc-500 focus:border-indigo-300/60 focus:outline-none"
                   placeholder="Votre numéro"
+                  className={`mt-2 w-full rounded-xl border px-4 py-3 text-sm outline-none ${theme.surface}`}
                 />
               </label>
 
-              <button
-                type="submit"
-                className="sm:col-span-2 mt-2 inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-zinc-900 transition hover:scale-[1.01] hover:bg-zinc-100 sm:text-base"
-              >
+              <button type="submit" className={`mt-2 rounded-full px-6 py-3 text-sm font-semibold sm:col-span-2 ${theme.cta}`}>
                 Rejoindre la liste d’attente
               </button>
 
-              <p className="sm:col-span-2 text-center text-xs text-zinc-400">
-                En vous inscrivant, vous acceptez de recevoir uniquement les informations liées au retour en stock et aux démonstrations.
+              <p className={`text-center text-xs sm:col-span-2 ${theme.soft}`}>
+                En validant, vous acceptez d’être contacté uniquement pour les infos de disponibilité NEXGYM ONE.
               </p>
             </form>
           </div>
