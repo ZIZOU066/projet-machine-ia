@@ -31,7 +31,7 @@ const performanceGallery = [
   {
     src: '/assets/nexgym/performance-detail-footwork.jpg',
     alt: 'Travail de pieds et récupération active',
-    title: 'Récupération active',
+    title: 'RÉCUPÉRATION OPTIMISÉE',
     text: 'Programmes guidés pour enchaîner entraînement et récupération sans casser votre rythme.',
   },
 ]
@@ -190,7 +190,7 @@ export default function App() {
               Rejoindre la waitlist
             </a>
             <a href="#comparatif" className={`rounded-full border px-7 py-3 text-sm font-black uppercase tracking-wide sm:text-base ${theme.ghost}`}>
-              Voir pourquoi NEXGYM
+              DÉCOUVRIR LE SYSTÈME
             </a>
           </div>
 
@@ -306,6 +306,9 @@ export default function App() {
               </span>
             </div>
           </div>
+                  <div className="mt-8 text-center">
+            <a href="#waitlist" className={`inline-flex rounded-full px-6 py-3 text-sm font-black uppercase tracking-wide ${theme.cta}`}>JE VEUX MON ACCÈS PRIORITAIRE</a>
+          </div>
         </section>
 
         <section id="waitlist" className="mx-auto mt-16 w-[min(760px,94%)]">
@@ -333,7 +336,7 @@ export default function App() {
               />
 
               <button type="submit" className={`rounded-full px-6 py-3 text-sm font-black uppercase tracking-wide sm:col-span-2 ${theme.cta}`}>
-                Rejoindre la liste d'attente
+                RÉSERVER MON ACCÈS VIP
               </button>
             </form>
 
