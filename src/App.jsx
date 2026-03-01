@@ -2,8 +2,8 @@ import { useMemo, useState } from 'react'
 
 const menuItems = [
   ['Impact', '#impact'],
-  ['Shift', '#shift'],
-  ['Preuve', '#preuve'],
+  ['Lifestyle', '#lifestyle'],
+  ['Performance', '#performance'],
   ['Comparatif', '#comparatif'],
 ]
 
@@ -12,6 +12,39 @@ const compareRows = [
   { label: 'Suivi', old: 'Approx.', one: 'IA en direct' },
   { label: 'Motivation', old: 'Variable', one: 'Rituels guidés' },
   { label: 'Style', old: 'Basique', one: 'Objet premium' },
+]
+
+const gallery = [
+  {
+    src: '/assets/nexgym/hero-premium-interior.jpg',
+    alt: 'NEXGYM ONE dans un salon premium minimaliste',
+    tag: 'Hero premium',
+  },
+  {
+    src: '/assets/nexgym/lifestyle-home-setup.jpg',
+    alt: 'NEXGYM ONE intégré dans un home setup lifestyle',
+    tag: 'Home setup',
+  },
+  {
+    src: '/assets/nexgym/performance-athlete-1.jpg',
+    alt: 'Athlète en effort de tirage avec résistance intelligente',
+    tag: 'Performance',
+  },
+  {
+    src: '/assets/nexgym/performance-athlete-2.jpg',
+    alt: 'Athlète en sprint avec suivi biomécanique',
+    tag: 'Explosivité',
+  },
+  {
+    src: '/assets/nexgym/performance-detail-footwork.jpg',
+    alt: 'Travail de pieds avec capteur de résistance',
+    tag: 'Précision',
+  },
+  {
+    src: '/assets/nexgym/performance-athlete-woman.jpg',
+    alt: 'Athlète en exercice au sol guidé par IA',
+    tag: 'Core training',
+  },
 ]
 
 export default function App() {
@@ -26,23 +59,29 @@ export default function App() {
             shell: 'border-white/15 bg-white/[0.04]',
             shellSoft: 'border-white/10 bg-white/[0.03]',
             chip: 'border-white/15 bg-black/45 text-white',
+            menuPanel: 'border-white/20 bg-[#0d1018]/95 text-white shadow-[0_18px_45px_rgba(0,0,0,0.5)]',
+            menuItem: 'border-white/15 bg-white/[0.03] hover:bg-white/[0.08] text-white',
             muted: 'text-white/70',
             soft: 'text-white/50',
             strong: 'text-[#a4adff]',
             cta: 'bg-white text-black hover:bg-white/90',
             ghost: 'border-white/20 hover:border-white/40',
+            imageOverlay: 'bg-gradient-to-t from-black/75 via-black/30 to-transparent',
             fx: 'bg-[radial-gradient(circle_at_50%_0%,rgba(111,126,255,0.3),transparent_44%),radial-gradient(circle_at_0%_50%,rgba(145,0,255,0.2),transparent_40%),radial-gradient(circle_at_100%_50%,rgba(0,212,255,0.18),transparent_36%)]',
           }
         : {
             root: 'bg-[#f5f7ff] text-[#0a0f1f]',
             shell: 'border-black/10 bg-white/95',
             shellSoft: 'border-black/10 bg-white',
-            chip: 'border-black/15 bg-white/80 text-[#0a0f1f]',
+            chip: 'border-black/15 bg-white/85 text-[#0a0f1f]',
+            menuPanel: 'border-black/15 bg-white text-[#0a0f1f] shadow-[0_16px_40px_rgba(15,23,42,0.16)]',
+            menuItem: 'border-black/10 bg-[#f7f9ff] hover:bg-white text-[#0a0f1f]',
             muted: 'text-slate-700',
             soft: 'text-slate-500',
             strong: 'text-indigo-700',
             cta: 'bg-[#0a0f1f] text-white hover:bg-black',
             ghost: 'border-black/20 hover:border-black/40',
+            imageOverlay: 'bg-gradient-to-t from-[#0a0f1f]/55 via-[#0a0f1f]/8 to-transparent',
             fx: 'bg-[radial-gradient(circle_at_50%_0%,rgba(99,102,241,0.24),transparent_44%),radial-gradient(circle_at_0%_50%,rgba(124,58,237,0.14),transparent_40%),radial-gradient(circle_at_100%_50%,rgba(6,182,212,0.14),transparent_36%)]',
           },
     [isDark],
@@ -97,13 +136,13 @@ export default function App() {
           </div>
 
           {menuOpen && (
-            <div className="mt-3 grid gap-2 md:hidden">
+            <div className={`mt-3 grid gap-2 rounded-2xl border p-2 md:hidden ${theme.menuPanel}`}>
               {[...menuItems, ["Liste d'attente", '#waitlist']].map(([label, href]) => (
                 <a
                   key={label}
                   href={href}
                   onClick={() => setMenuOpen(false)}
-                  className={`rounded-2xl border px-4 py-3 text-sm font-medium ${theme.shell}`}
+                  className={`rounded-xl border px-4 py-3 text-sm font-semibold ${theme.menuItem}`}
                 >
                   {label}
                 </a>
@@ -123,7 +162,7 @@ export default function App() {
             <span className={`block ${theme.strong}`}>Maintenant chez vous.</span>
           </h1>
           <p className={`mx-auto mt-6 max-w-2xl text-sm font-medium uppercase tracking-[0.16em] sm:text-base ${theme.muted}`}>
-            Fin des excuses. Fin des pertes de temps.
+            Rupture en cours. Prochaine vague réservée aux inscrits.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -135,38 +174,61 @@ export default function App() {
             </span>
           </div>
 
-          <div className="mt-12 grid gap-4 sm:grid-cols-3">
-            {['1 machine', '0 compromis', '100% vous'].map((stat) => (
-              <div key={stat} className={`rounded-3xl border px-5 py-7 text-xl font-extrabold uppercase ${theme.shell}`}>
-                {stat}
-              </div>
-            ))}
-          </div>
+          <article className={`relative mt-12 overflow-hidden rounded-[2.2rem] border ${theme.shell}`}>
+            <img
+              src="/assets/nexgym/hero-premium-interior.jpg"
+              alt="Machine NEXGYM ONE dans un intérieur premium"
+              className="h-[420px] w-full object-cover sm:h-[520px]"
+            />
+            <div className={`absolute inset-0 ${theme.imageOverlay}`} />
+            <div className="absolute inset-x-0 bottom-0 p-6 text-left sm:p-8">
+              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-cyan-300">Hero premium</p>
+              <h2 className="mt-3 max-w-xl text-2xl font-black uppercase leading-tight sm:text-4xl">
+                L'objet fitness qui upgrade instantanément votre intérieur.
+              </h2>
+            </div>
+          </article>
         </section>
 
-        <section className="mx-auto mt-14 grid w-[min(1100px,94%)] gap-4" id="shift">
-          <article className={`rounded-[2rem] border p-6 sm:p-8 ${theme.shell}`}>
-            <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-rose-400">Problème</p>
-            <h2 className="mt-3 text-3xl font-black uppercase sm:text-5xl">La salle vous vole du temps.</h2>
-            <p className={`mt-4 text-sm font-semibold uppercase tracking-[0.1em] ${theme.muted}`}>
-              Trajets. Files. Horaires. Motivation cassée.
-            </p>
+        <section className="mx-auto mt-14 grid w-[min(1100px,94%)] gap-4" id="lifestyle">
+          <article className={`grid overflow-hidden rounded-[2rem] border md:grid-cols-[1.1fr,1fr] ${theme.shell}`}>
+            <img
+              src="/assets/nexgym/lifestyle-home-setup.jpg"
+              alt="NEXGYM ONE dans une salle lifestyle à domicile"
+              className="h-full min-h-[300px] w-full object-cover"
+            />
+            <div className="p-6 sm:p-8">
+              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-rose-400">Lifestyle / home setup</p>
+              <h2 className="mt-3 text-3xl font-black uppercase sm:text-5xl">Zéro trajet. Zéro friction.</h2>
+              <p className={`mt-4 text-sm font-semibold uppercase tracking-[0.1em] ${theme.muted}`}>
+                Votre setup devient un espace d'entraînement premium, prêt en 10 secondes.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-2 text-[11px] font-bold uppercase tracking-[0.16em]">
+                {['Design signature', 'Encombrement réduit', 'Prêt chaque jour'].map((item) => (
+                  <span key={item} className={`rounded-full border px-3 py-2 ${theme.shellSoft}`}>
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
           </article>
+        </section>
 
-          <article className={`rounded-[2rem] border p-6 sm:p-8 ${theme.shell}`} id="preuve">
-            <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-cyan-400">Transformation</p>
-            <h2 className="mt-3 text-3xl font-black uppercase sm:text-5xl">NEXGYM ONE recentre tout sur vous.</h2>
-            <p className={`mt-4 text-sm font-semibold uppercase tracking-[0.1em] ${theme.muted}`}>
-              IA live. Résistance intelligente. Sessions courtes.
-            </p>
-          </article>
-
+        <section className="mx-auto mt-14 w-[min(1100px,94%)]" id="performance">
           <article className={`rounded-[2rem] border p-6 sm:p-8 ${theme.shell}`}>
-            <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-lime-400">Preuve</p>
-            <h2 className="mt-3 text-3xl font-black uppercase sm:text-5xl">Vous tenez le rythme.</h2>
+            <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-cyan-400">Performance athlète</p>
+            <h2 className="mt-3 text-3xl font-black uppercase sm:text-5xl">Résistance intelligente. Résultats visibles.</h2>
             <p className={`mt-4 text-sm font-semibold uppercase tracking-[0.1em] ${theme.muted}`}>
-              Plus régulier. Plus net. Plus premium.
+              Chaque répétition est guidée, mesurée et optimisée en live.
             </p>
+
+            <div className="mt-7 grid gap-4 sm:grid-cols-3">
+              {gallery.slice(2, 5).map((item) => (
+                <figure key={item.src} className="overflow-hidden rounded-2xl border border-current/10">
+                  <img src={item.src} alt={item.alt} className="h-64 w-full object-cover" />
+                </figure>
+              ))}
+            </div>
           </article>
         </section>
 
@@ -184,6 +246,29 @@ export default function App() {
                 <span className="font-black text-current">{row.one}</span>
               </div>
             ))}
+          </div>
+        </section>
+
+        <section className="mx-auto mt-16 w-[min(1100px,94%)]">
+          <div className={`rounded-[2rem] border p-5 sm:p-6 ${theme.shell}`}>
+            <div className="mb-4 flex items-center justify-between gap-4">
+              <h3 className="text-xl font-black uppercase sm:text-2xl">Galerie compacte</h3>
+              <span className={`text-[11px] font-bold uppercase tracking-[0.16em] ${theme.soft}`}>6 visuels premium</span>
+            </div>
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-6">
+              {gallery.map((item) => (
+                <figure key={item.src} className="group relative overflow-hidden rounded-xl border border-current/10">
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    className="h-28 w-full object-cover transition duration-300 group-hover:scale-105 md:h-36"
+                  />
+                  <figcaption className="absolute inset-x-0 bottom-0 bg-black/45 px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-white">
+                    {item.tag}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
           </div>
         </section>
 
