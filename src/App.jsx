@@ -61,31 +61,31 @@ export default function App() {
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-[var(--bg)] text-[var(--text)]">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 border-b border-[var(--border)] bg-[var(--bg)]/90 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <a href="#top" className="font-display text-lg font-bold tracking-tight text-[var(--text)]">
+      {/* Header — chip flottant, s'adapte au viewport sans overflow */}
+      <header className="fixed left-0 right-0 top-3 z-[100] flex justify-center px-3 sm:top-4 sm:px-4">
+        <div className="relative flex min-w-0 max-w-[calc(100vw-1.5rem)] items-center justify-between gap-2 rounded-full border border-white/15 bg-[var(--bg)]/80 px-3 py-2 shadow-xl backdrop-blur-xl sm:max-w-[calc(100vw-2rem)] sm:gap-3 sm:px-4 sm:py-2.5 md:gap-4 md:px-5 lg:gap-6">
+          <a href="#top" className="font-display shrink-0 text-base font-bold tracking-tight text-[var(--text)] sm:text-lg">
             NEXGYM ONE
           </a>
 
-          <nav className="hidden items-center gap-10 md:flex">
+          <nav className="hidden min-w-0 shrink items-center gap-3 overflow-x-auto md:flex md:gap-4 lg:gap-6 [scrollbar-width:thin]">
             {navLinks.map(([label, href]) => (
               <a
                 key={href}
                 href={href}
-                className="text-sm font-medium text-[var(--text-muted)] transition hover:text-[var(--text)]"
+                className="shrink-0 whitespace-nowrap text-xs font-medium text-[var(--text-muted)] transition hover:text-[var(--text)] md:text-sm"
               >
                 {label}
               </a>
             ))}
-            <div className="ml-4 flex items-center gap-3">
+            <div className="ml-1 flex shrink-0 items-center gap-2 md:ml-2 md:gap-3">
               <div className="flex rounded-full border border-[var(--border)] bg-[var(--bg-elevated)] p-0.5">
                 {LANG_OPTIONS.map(({ code, label }) => (
                   <button
                     key={code}
                     type="button"
                     onClick={() => setLang(code)}
-                    className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition ${
+                    className={`rounded-full px-2.5 py-1 text-[10px] font-semibold transition sm:px-3 sm:py-1.5 sm:text-xs ${
                       lang === code ? 'bg-[var(--cta-bg)] text-[var(--cta-text)]' : 'text-[var(--text-muted)] hover:text-[var(--text)]'
                     }`}
                   >
@@ -95,21 +95,21 @@ export default function App() {
               </div>
               <a
                 href="#waitlist"
-                className="rounded-full bg-[var(--cta-bg)] px-5 py-2.5 text-sm font-bold text-[var(--cta-text)] transition hover:opacity-90"
+                className="shrink-0 whitespace-nowrap rounded-full bg-[var(--cta-bg)] px-3 py-2 text-xs font-bold text-[var(--cta-text)] transition hover:opacity-90 md:px-4 md:py-2.5 md:text-sm"
               >
                 {T.nav.cta}
               </a>
             </div>
           </nav>
 
-          <div className="flex items-center gap-3 md:hidden">
+          <div className="flex shrink-0 items-center gap-2 md:hidden">
             <div className="flex rounded-full border border-[var(--border)] bg-[var(--bg-elevated)] p-0.5">
               {LANG_OPTIONS.map(({ code, label }) => (
                 <button
                   key={code}
                   type="button"
                   onClick={() => setLang(code)}
-                  className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
+                  className={`rounded-full px-2 py-1 text-[10px] font-semibold ${
                     lang === code ? 'bg-[var(--cta-bg)] text-[var(--cta-text)]' : 'text-[var(--text-muted)]'
                   }`}
                 >
@@ -120,39 +120,39 @@ export default function App() {
             <button
               type="button"
               onClick={() => setMenuOpen((v) => !v)}
-              className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-lg border border-[var(--border)]"
+              className="flex h-11 w-11 shrink-0 touch-manipulation flex-col items-center justify-center gap-1.5 rounded-xl border border-[var(--border)] active:opacity-80 sm:h-10 sm:w-10"
               aria-expanded={menuOpen}
-              aria-label="Menu"
+              aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
             >
-              <span className={`h-0.5 w-5 rounded-full bg-current transition ${menuOpen ? 'translate-y-2 rotate-45' : ''}`} />
-              <span className={`h-0.5 w-5 rounded-full bg-current transition ${menuOpen ? 'opacity-0' : ''}`} />
-              <span className={`h-0.5 w-5 rounded-full bg-current transition ${menuOpen ? '-translate-y-2 -rotate-45' : ''}`} />
+              <span className={`block h-0.5 w-5 rounded-full bg-current transition-all duration-200 ${menuOpen ? 'translate-y-2 rotate-45' : ''}`} />
+              <span className={`block h-0.5 w-5 rounded-full bg-current transition-all duration-200 ${menuOpen ? 'scale-0 opacity-0' : ''}`} />
+              <span className={`block h-0.5 w-5 rounded-full bg-current transition-all duration-200 ${menuOpen ? '-translate-y-2 -rotate-45' : ''}`} />
             </button>
           </div>
-        </div>
 
-        {menuOpen && (
-          <div className="border-t border-[var(--border)] bg-[var(--bg-elevated)] px-4 py-4 md:hidden">
-            <div className="flex flex-col gap-0.5">
-              {navLinks.map(([label, href]) => (
-                <a
-                  key={href}
-                  href={href}
-                  onClick={() => setMenuOpen(false)}
-                  className="rounded-lg px-4 py-3 text-sm font-medium text-[var(--text)] hover:bg-white/5"
-                >
-                  {label}
+          {menuOpen && (
+            <div className="absolute left-0 right-0 top-full z-50 mt-2 rounded-2xl border border-white/15 bg-[#0e1015] px-4 py-4 shadow-2xl md:hidden" role="dialog" aria-label="Menu de navigation">
+              <div className="flex flex-col gap-0.5">
+                {navLinks.map(([label, href]) => (
+                  <a
+                    key={href}
+                    href={href}
+                    onClick={() => setMenuOpen(false)}
+                    className="rounded-lg px-4 py-3 text-sm font-medium text-[var(--text)] hover:bg-white/5"
+                  >
+                    {label}
+                  </a>
+                ))}
+                <a href="#waitlist" onClick={() => setMenuOpen(false)} className="mt-2 rounded-full bg-[var(--cta-bg)] px-4 py-3 text-center text-sm font-bold text-[var(--cta-text)]">
+                  {T.nav.cta}
                 </a>
-              ))}
-              <a href="#waitlist" onClick={() => setMenuOpen(false)} className="mt-2 rounded-full bg-[var(--cta-bg)] px-4 py-3 text-center text-sm font-bold text-[var(--cta-text)]">
-                {T.nav.cta}
-              </a>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </header>
 
-      <main id="top" className="relative pt-16 pb-24">
+      <main id="top" className="relative pb-24">
         {/* Hero — 100vh + slider auto */}
         <section id="hero" className="relative min-h-[100vh] w-full overflow-hidden">
           <div className="absolute inset-0">
@@ -254,9 +254,6 @@ export default function App() {
             <h2 className="font-display mt-2 text-3xl font-bold sm:text-4xl">
               {T.performance.title}
             </h2>
-            <p className="mt-2 text-sm text-[var(--text-soft)]">
-              {T.performance.subtitle}
-            </p>
 
             <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-12 sm:gap-4">
               {/* Ligne 1: Force — image large (8) + texte (4) */}
@@ -275,14 +272,14 @@ export default function App() {
                 </div>
               </div>
               <div className="flex flex-col justify-center rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)]/50 p-6 sm:col-span-4">
-                <p className="text-sm leading-relaxed text-[var(--text-muted)]">
+                <p className="text-base font-medium leading-relaxed text-[var(--text-muted)] sm:text-lg">
                   {T.performance[performanceGallery[0].textKey]}
                 </p>
               </div>
 
               {/* Ligne 2: Cardio — texte (4) + image large (8) */}
               <div className="order-2 flex flex-col justify-center rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)]/50 p-6 sm:order-1 sm:col-span-4">
-                <p className="text-sm leading-relaxed text-[var(--text-muted)]">
+                <p className="text-base font-medium leading-relaxed text-[var(--text-muted)] sm:text-lg">
                   {T.performance[performanceGallery[1].textKey]}
                 </p>
               </div>
@@ -317,14 +314,14 @@ export default function App() {
                 </div>
               </div>
               <div className="flex flex-col justify-center rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)]/50 p-6 sm:col-span-4">
-                <p className="text-sm leading-relaxed text-[var(--text-muted)]">
+                <p className="text-base font-medium leading-relaxed text-[var(--text-muted)] sm:text-lg">
                   {T.performance[performanceGallery[2].textKey]}
                 </p>
               </div>
 
               {/* Ligne 4: Récupération — texte (4) + image large (8) */}
               <div className="flex flex-col justify-center rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)]/50 p-6 sm:col-span-4">
-                <p className="text-sm leading-relaxed text-[var(--text-muted)]">
+                <p className="text-base font-medium leading-relaxed text-[var(--text-muted)] sm:text-lg">
                   {T.performance[performanceGallery[3].textKey]}
                 </p>
               </div>
