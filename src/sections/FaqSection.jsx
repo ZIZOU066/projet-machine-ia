@@ -8,8 +8,8 @@ export default function FaqSection({ faq }) {
       <Container>
         <SectionTitle
           eyebrow="FAQ"
-          title="Les réponses utiles avant de rejoindre l’accès anticipé"
-          description="On va à l’essentiel: disponibilité, coût, profils concernés et fonctionnement de la waitlist."
+          title="Les réponses essentielles avant de rejoindre la waitlist"
+          description="Objectif: vous donner un cadre clair, crédible et rassurant en quelques secondes."
         />
         <div className="space-y-4">
           {faq.map((item) => (
