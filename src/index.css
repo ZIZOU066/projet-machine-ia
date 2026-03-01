@@ -5,13 +5,13 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
-  @apply m-0 bg-midnight text-white antialiased;
+  @apply m-0 bg-pearl text-ink antialiased;
 }
 
 * {
-  @apply border-white/10;
+  @apply border-slate/50;
 }

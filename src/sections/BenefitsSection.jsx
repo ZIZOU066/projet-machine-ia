@@ -7,14 +7,14 @@ export default function BenefitsSection({ items }) {
       <Container>
         <SectionTitle
           eyebrow="Bénéfices"
-          title="Conçu pour les gens qui veulent un vrai levier, pas un gadget"
-          description="Aeke combine intelligence contextuelle, vitesse d’exécution et expérience premium pour transformer vos journées."
+          title="Une expérience claire pour garder le contrôle de vos journées"
+          description="Aeke vous fait gagner du temps sans ajouter de complexité. Vous voyez vite ce qui compte, et vous exécutez mieux."
         />
         <div className="grid gap-5 md:grid-cols-3">
           {items.map((benefit) => (
-            <article key={benefit.title} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-              <h3 className="text-lg font-semibold text-white">{benefit.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/70">{benefit.description}</p>
+            <article key={benefit.title} className="rounded-3xl border border-line bg-panel p-7 shadow-soft">
+              <h3 className="text-lg font-semibold text-ink">{benefit.title}</h3>
+              <p className="mt-4 text-sm leading-relaxed text-slate">{benefit.description}</p>
             </article>
           ))}
         </div>

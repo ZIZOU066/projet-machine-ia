@@ -7,55 +7,59 @@ export const navLinks = [
 
 export const benefits = [
   {
-    title: 'Un assistant IA qui anticipe vos routines',
+    title: 'Une IA qui prépare votre journée avant vous',
     description:
-      'Aeke apprend vos habitudes, priorise vos tâches et propose la meilleure action au bon moment.',
+      'Aeke repère vos priorités, trie vos urgences et vous propose les prochaines actions utiles.',
   },
   {
-    title: 'Pilotage instantané sur mobile et desktop',
+    title: 'Une exécution fluide entre mobile et desktop',
     description:
-      'Passez d’un brief vocal sur smartphone à une exécution précise sur votre poste de travail, sans friction.',
+      'Vous lancez une demande en mobilité, vous récupérez un résultat clair sur votre poste sans friction.',
   },
   {
-    title: 'Design premium, expérience ultra fluide',
+    title: 'Une interface premium, pensée pour durer',
     description:
-      'Interface claire, animations élégantes et interactions rapides pour un ressenti réellement haut de gamme.',
+      'Hiérarchie visuelle nette, interactions rapides, zéro surcharge: vous restez concentré sur l’essentiel.',
   },
 ]
 
 export const steps = [
   {
-    title: '1. Demandez',
-    detail: 'Décrivez votre objectif en langage naturel, à l’écrit ou à la voix.',
+    title: '01 · Décrivez votre objectif',
+    detail: 'En quelques mots, à l’écrit ou à la voix, expliquez ce que vous voulez obtenir.',
   },
   {
-    title: '2. Validez',
-    detail: 'Aeke propose un plan concret, ajustable en un tap.',
+    title: '02 · Validez le plan',
+    detail: 'Aeke construit une proposition claire que vous ajustez en quelques secondes.',
   },
   {
-    title: '3. Exécutez',
-    detail: 'L’assistant orchestre vos actions et vous livre un résultat prêt à l’usage.',
+    title: '03 · Lancez et suivez',
+    detail: 'L’assistant exécute et vous livre un résultat prêt à utiliser immédiatement.',
   },
 ]
 
 export const useCases = [
-  'Préparer une journée de rendez-vous sans rien oublier.',
-  'Transformer des notes brutes en plan d’action clair.',
-  'Automatiser les suivis clients avec un ton naturel.',
-  'Centraliser tâches pro et perso dans une seule vue.',
+  'Fondateur: structurer la semaine, prioriser les sujets clés et tenir le cap.',
+  'Freelance: transformer un brief client en plan d’action concret en moins de 5 minutes.',
+  'Équipe produit: consolider les notes de réunion et sortir des next steps exploitables.',
+  'Ops / BizDev: préparer les relances et suivis clients avec un message propre et constant.',
 ]
 
 export const faq = [
   {
-    q: 'Aeke est-il déjà disponible ? ',
-    a: 'Aeke arrive bientôt. Les membres de la waitlist auront un accès anticipé prioritaire.',
+    q: 'Aeke est-il déjà disponible ?',
+    a: 'Le produit arrive bientôt. La waitlist donne un accès anticipé prioritaire dès l’ouverture.',
   },
   {
-    q: 'Y a-t-il un paiement pour rejoindre la waitlist ? ',
-    a: 'Non. L’inscription est 100% gratuite et sans engagement.',
+    q: 'Rejoindre la waitlist est-il payant ?',
+    a: 'Non. L’inscription est gratuite, sans carte bancaire et sans engagement.',
   },
   {
-    q: 'Qui peut rejoindre le programme anticipé ? ',
-    a: 'Freelances, fondateurs, équipes produit et profils exigeants qui veulent gagner du temps chaque semaine.',
+    q: 'Qui est prioritaire pour l’accès anticipé ?',
+    a: 'Les profils qui ont un vrai besoin opérationnel: freelances, fondateurs, équipes produit et ops.',
+  },
+  {
+    q: 'Combien de temps pour recevoir une réponse ?',
+    a: 'Nous contactons les inscrits par vagues. Les premiers inscrits sont servis en priorité.',
   },
 ]

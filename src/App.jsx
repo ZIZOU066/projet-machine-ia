@@ -10,7 +10,7 @@ import { benefits, faq, navLinks, steps, useCases } from './data/content'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-midnight text-white">
+    <div className="min-h-screen bg-pearl text-ink">
       <Header navLinks={navLinks} />
       <main>
         <HeroSection />

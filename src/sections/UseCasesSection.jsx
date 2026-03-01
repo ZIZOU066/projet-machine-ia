@@ -6,13 +6,13 @@ export default function UseCasesSection({ useCases }) {
     <section id="cas-usage" className="py-20 sm:py-24">
       <Container>
         <SectionTitle
-          eyebrow="Cas d’usage"
-          title="Pensé pour le quotidien réel"
-          description="Que vous soyez solo ou en équipe, Aeke s’adapte à votre rythme de travail." 
+          eyebrow="Social proof / cas d’usage"
+          title="Pensé pour des profils exigeants"
+          description="Des cas concrets où Aeke apporte un vrai gain de temps, sans effet gadget."
         />
         <div className="grid gap-4 sm:grid-cols-2">
           {useCases.map((item) => (
-            <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 text-sm text-white/80 sm:text-base">
+            <div key={item} className="rounded-2xl border border-line bg-panel px-6 py-5 text-sm leading-relaxed text-slate shadow-soft sm:text-base">
               {item}
             </div>
           ))}

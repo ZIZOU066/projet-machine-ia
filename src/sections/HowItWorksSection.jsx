@@ -6,15 +6,15 @@ export default function HowItWorksSection({ steps }) {
     <section id="fonctionnement" className="py-20 sm:py-24">
       <Container>
         <SectionTitle
-          eyebrow="Fonctionnement"
-          title="Simple en apparence, puissant à l’usage"
-          description="Trois étapes pour passer d’une intention à un résultat concret, sans friction." 
+          eyebrow="Comment ça marche"
+          title="Trois étapes, zéro friction"
+          description="De l’intention au résultat, tout est pensé pour être lisible, rapide et actionnable."
         />
         <div className="grid gap-5 md:grid-cols-3">
           {steps.map((step) => (
-            <article key={step.title} className="rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-6">
-              <p className="text-sm font-semibold uppercase tracking-[0.13em] text-mint">{step.title}</p>
-              <p className="mt-4 text-base text-white/80">{step.detail}</p>
+            <article key={step.title} className="rounded-3xl border border-line bg-panel p-7 shadow-soft">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-mint">{step.title}</p>
+              <p className="mt-5 text-base leading-relaxed text-slate">{step.detail}</p>
             </article>
           ))}
         </div>
