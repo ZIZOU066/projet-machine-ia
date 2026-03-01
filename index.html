@@ -1,1 +1,145 @@
-<!doctype html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Projet Machine IA — Concepts</title><style>body{margin:0;font-family:Inter,system-ui;background:#0b0f19;color:#eef2ff}.wrap{max-width:1000px;margin:0 auto;padding:28px}h1{margin:0 0 8px}p{color:#aeb7d3}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:18px}.card{background:#131a2c;border:1px solid #2b365c;border-radius:14px;padding:16px}.btn{display:inline-block;margin-top:10px;padding:10px 14px;border-radius:10px;background:#7aa2ff;color:#081022;text-decoration:none;font-weight:700}</style></head><body><div class="wrap"><h1>Projet Machine IA — 3 directions</h1><p>Tu m’as demandé de proposer et modifier direct. Voilà 3 versions live. Dis-moi "#1/#2/#3" et je polish celle que tu veux.</p><div class="grid"><div class="card"><h3>1) Monolith (luxe)</h3><p>Ultra premium, très sobre, impact visuel fort.</p><a class="btn" href="./monolith.html">Voir #1</a></div><div class="card"><h3>2) Velocity (performance)</h3><p>Énergie sport, orienté progrès et motivation.</p><a class="btn" href="./velocity.html">Voir #2</a></div><div class="card"><h3>3) Clarity (conversion)</h3><p>Ultra compréhensible, conversion accès anticipé max.</p><a class="btn" href="./clarity.html">Voir #3</a></div></div></div></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>K1 Home Gym — AI-Powered Strength System</title>
+  <style>
+    :root{
+      --bg:#07090f; --panel:#0f1320; --text:#f4f6fb; --muted:#adb5c8; --line:#252b3d;
+      --accent:#dfe7ff; --accentText:#0a1022;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial}
+    .container{max-width:1140px;margin:0 auto;padding:24px}
+
+    .nav{display:flex;justify-content:space-between;align-items:center;padding:10px 0 18px}
+    .logo{font-weight:700;letter-spacing:.08em;font-size:.88rem;color:#d4dcf3}
+    .nav a{color:#d4dcf3;text-decoration:none;font-size:.9rem;margin-left:16px}
+
+    .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:center;padding:24px 0 34px}
+    .hero h1{font-size:clamp(2rem,4.6vw,4rem);line-height:1.03;margin:0 0 14px}
+    .hero p{color:var(--muted);font-size:clamp(1rem,1.8vw,1.15rem);line-height:1.6;margin:0 0 20px;max-width:56ch}
+
+    .cta{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{border:1px solid var(--line);border-radius:12px;padding:12px 18px;font-weight:650;text-decoration:none;display:inline-block}
+    .btn.primary{background:var(--accent);color:var(--accentText);border-color:var(--accent)}
+    .btn.ghost{color:#d4dcf3;background:transparent}
+
+    .media{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#0a0e19}
+    .media img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:4/5}
+
+    .section{padding:34px 0;border-top:1px solid #161b2a}
+    .section h2{margin:0 0 12px;font-size:clamp(1.3rem,2.8vw,2rem)}
+    .section p{margin:0;color:var(--muted);line-height:1.6}
+
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+    .card h3{margin:0 0 8px;font-size:1rem}
+    .card p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.55}
+
+    .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+    .step{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+    .step b{display:block;margin-bottom:6px;font-size:.85rem;color:#cfd8f6;letter-spacing:.04em}
+
+    .faq{display:grid;gap:10px;margin-top:14px}
+    details{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px}
+    summary{cursor:pointer;font-weight:600}
+    details p{margin:10px 0 0;color:var(--muted)}
+
+    .waitlist{display:grid;grid-template-columns:1fr .9fr;gap:18px;align-items:start}
+    form{display:grid;gap:10px}
+    input,select{width:100%;padding:12px;border-radius:10px;border:1px solid #2a3250;background:#0c1120;color:#e9efff}
+    .note{font-size:.85rem;color:#91a0c8}
+
+    .foot{padding:24px 0;color:#7f8bae;font-size:.85rem}
+
+    @media (max-width:920px){
+      .hero,.waitlist{grid-template-columns:1fr}
+      .grid,.steps{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav">
+      <div class="logo">K1 HOME GYM</div>
+      <div>
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#access">Early Access</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div>
+        <h1>Train smarter at home.</h1>
+        <p>
+          A compact AI-powered strength system designed for real progress at home.
+          Precision resistance, real-time coaching, and performance tracking — without the bulk of a traditional gym.
+        </p>
+        <div class="cta">
+          <a class="btn primary" href="#access">Get Early Access</a>
+          <a class="btn ghost" href="#how">See how it works</a>
+        </div>
+      </div>
+      <div class="media">
+        <img src="https://aeke.com/cdn/shop/files/AEKE_Smart_Home_Gym_K1_16_grande.jpg" alt="Smart home gym" />
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <h2>Built for performance. Designed for home.</h2>
+      <p>Everything you need in one intelligent system: strength, guidance, and progress — in a footprint that fits modern spaces.</p>
+      <div class="grid">
+        <article class="card"><h3>AI Coaching</h3><p>Real-time guidance and form feedback to train safer and better.</p></article>
+        <article class="card"><h3>Digital Resistance</h3><p>Fine resistance control and smooth transitions across movements.</p></article>
+        <article class="card"><h3>Progress Tracking</h3><p>Clear metrics so you can see improvement session after session.</p></article>
+      </div>
+    </section>
+
+    <section id="how" class="section">
+      <h2>How it works</h2>
+      <div class="steps">
+        <article class="step"><b>STEP 1</b><p>Set your profile and training intent.</p></article>
+        <article class="step"><b>STEP 2</b><p>Follow guided sessions with live feedback.</p></article>
+        <article class="step"><b>STEP 3</b><p>Track your progress and adapt over time.</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Frequently asked questions</h2>
+      <div class="faq">
+        <details><summary>Is this a pre-order page?</summary><p>No. This page is for early access registration only.</p></details>
+        <details><summary>Who is this for?</summary><p>Individuals, residences, and performance-focused users who want a premium home setup.</p></details>
+        <details><summary>When will demos open in France?</summary><p>Invitations will be sent first to early access registrants.</p></details>
+      </div>
+    </section>
+
+    <section id="access" class="section">
+      <div class="waitlist">
+        <div>
+          <h2>Get early access</h2>
+          <p>Join the first group to receive launch updates, demo invitations, and priority information for France.</p>
+        </div>
+        <div class="card">
+          <form>
+            <input type="text" placeholder="Full name" required>
+            <input type="email" placeholder="Email" required>
+            <input type="tel" placeholder="Phone / WhatsApp (optional)">
+            <select>
+              <option>Individual</option>
+              <option>Residence / Hospitality</option>
+              <option>Coach / Studio</option>
+            </select>
+            <button class="btn primary" type="button">Request early access</button>
+          </form>
+          <p class="note">Form is in preview mode (not connected yet).</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">© 2026 K1 Home Gym — Early Access France</footer>
+  </div>
+</body>
+</html>
