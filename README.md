@@ -1,60 +1,57 @@
-# Projet Machine IA — Waitlist France (Brand Shock Edition)
+# Projet Machine IA — Page Accès anticipé (France)
 
-Landing page statique premium/mobile-first orientée **conversion waitlist uniquement**.
+Refonte complète en style **minimal premium** (sobriété Apple/Raycast):
+- palette neutre (noir/gris/blanc + accent discret)
+- hiérarchie claire, beaucoup d’air
+- mobile-first propre
+- copy courte et humaine
+- sans effets gadgets
 
-## Objectif
-Créer un impact visuel immédiat (3 secondes) pour un lancement France d’un AI Home Gym, sans vente directe, avec storytelling clair:
+## Positionnement
 
-- Problème → Solution → Preuve → Waitlist
-- Positionnement haut de gamme/émotionnel
-- Branding neutre (pas de mention explicite de marque)
+Cette page ne vend pas le produit.
+Elle sert à **tester l’intérêt marché en France** via une **inscription prioritaire / accès anticipé**.
 
-## Ce qui a été refait
+## Sections livrées
 
-- `index.html` entièrement refondu (design cinématique + glassmorphism maîtrisé)
-- Hero fullscreen avec fond vidéo + overlay premium
-- Direction artistique forte (néons pink/violet/cyan, typo Sora + Inter)
-- Sections conversion ajoutées:
-  - Pourquoi maintenant
-  - Lancement France
-  - FAQ courte conversion
-- Features produit réelles intégrées:
-  - coaching IA
-  - correction de forme
-  - résistance digitale
-  - format compact
-  - multi-profils
-  - sans abonnement
-- Micro-interactions légères:
-  - reveal au scroll
-  - parallax léger sur hero
-  - hover cards
+1. Hero + CTA principal
+2. Pourquoi ce produit
+3. Comment ça fonctionne (3 étapes)
+4. Pour qui
+5. FAQ courte
+6. Formulaire d’accès anticipé
 
-## Media
+## Formulaire
 
-Section média en mode léger:
+Champs présents:
+- Nom
+- Email
+- Téléphone (optionnel)
+- Profil
 
-- Miniatures YouTube (`loading="lazy"`)
-- Liens play externes (pas d’embed lourd par défaut)
+CTA:
+- **Demander un accès anticipé**
 
-## Fichiers
+Important:
+- Le formulaire est volontairement **non branché** (note dev affichée dans la page).
 
-- `index.html` — landing complète
-- `assets/hero-poster.svg` — fallback visuel hero
-- `assets/README.md` — notes de remplacement assets
+## Assets
 
-## Développement local
+Usage sobre des assets existants du projet:
+- `assets/hero-poster.svg` utilisé dans le hero
+- `assets/hero-poster.svg` réutilisé dans le bloc formulaire (pas de surcharge visuelle)
+
+## Lancer en local
 
 ```bash
-# dans ce dossier
+cd /home/ubuntu/.openclaw/workspace/aeke-waitlist-fr
 python3 -m http.server 8080
-# puis ouvrir http://localhost:8080
 ```
 
-## Déploiement Vercel
+Puis ouvrir: `http://localhost:8080`
+
+## Déploiement Vercel (production)
 
 ```bash
 vercel --prod
 ```
-
-> Si le projet est déjà lié, Vercel redéploie directement en production.
